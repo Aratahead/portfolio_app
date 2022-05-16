@@ -1,7 +1,8 @@
 <h1>記録一覧</h1>
 <% if user_signed_in? %>
   <% @posts.each.with_index(1) do |post,i| %>
-     <p><%= post.question_name %></p>
+     <p>問題名<%= post.question_name %></p>
+     <p>会員NO.<%= post.user.id%></p>
      <%= link_to "詳細",post_path(post) %>
      <%= link_to "編集",edit_post_path(post)%>
      <%= link_to "削除",post_path(post), method: :delete, data: { confirm: "削除しますか?" } %>
