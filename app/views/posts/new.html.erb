@@ -1,0 +1,7 @@
+<h1>解いた問題の情報を記録</h1>
+<%= form_with model:@post,local: true do |form|%>
+  <p><%= form.label :question_name,"問題名" %><%= form.text_field :question_name %></p>
+  <p><%= form.label :code, "コード" %><%= form.text_area :code %></p>
+  <p><%= form.label :code, "コメント" %><%= form.text_area :comment %></p>
+  <%= form.submit "登録"%>
+<% end %>

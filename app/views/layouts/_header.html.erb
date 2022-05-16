@@ -1,4 +1,6 @@
 <% if user_signed_in?%>
+     <%= link_to "トップ", posts_path%>
+     <%= link_to "投稿画面へ", new_post_path %>
      <%= link_to "アカウント編集",edit_user_registration_path %>
      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか?"}%>
      <%="【ログイン中のアドレス】#{current_user.email}" %>
