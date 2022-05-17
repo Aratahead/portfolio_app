@@ -2,3 +2,6 @@
 <p>問題名<%= @post.question_name %></p>
 <p>コード<%= @post.code%></p>
 <p>コメント<%= @post.comment%></p>
+<% @post_tags.each do |tag|%>
+  <p>タグ<%= tag.name %></p>
+<% end %>
