@@ -2,6 +2,7 @@
 <%= form_with model:@post,local: true do |form|%>
   <p><%= form.label :question_name,"問題名" %><%= form.text_field :question_name %></p>
   <p><%= form.label :code, "コード" %><%= form.text_area :code %></p>
-  <p><%= form.label :code, "コメント" %><%= form.text_area :comment %></p>
+  <p><%= form.label :comment, "コメント" %><%= form.text_area :comment %></p>
+  <p><%= form.label :name ,"タグ"%><%= form.text_area :name,value: @tag_list%></p>
   <%= form.submit "登録"%>
 <% end %>

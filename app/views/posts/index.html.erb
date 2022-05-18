@@ -1,8 +1,14 @@
 <h1>記録一覧</h1>
 <% if user_signed_in? %>
+  <% @tag_list.each do |list|%>
+    <%= link_to list.name, search_tag_path(tag_id: list.id) %>
+    <%="(#{list.posts.count})" %>
+  <% end %>
+
   <% @posts.each.with_index(1) do |post,i| %>
      <p>問題名<%= post.question_name %></p>
      <p>会員NO.<%= post.user.id%></p>
+     <p>タグ<%=post.tags.pluck(:name).join('')%></p>
      <%= link_to "詳細",post_path(post) %>
      <%= link_to "編集",edit_post_path(post)%>
      <%= link_to "削除",post_path(post), method: :delete, data: { confirm: "削除しますか?" } %>
