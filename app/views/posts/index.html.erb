@@ -1,7 +1,7 @@
 <h1>記録一覧</h1>
 <% if user_signed_in? %>
   <% @tag_list.each do |list|%>
-    <%= list.name %>
+    <%= link_to list.name, search_tag_path(tag_id: list.id) %>
     <%="(#{list.posts.count})" %>
   <% end %>
 

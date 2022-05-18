@@ -43,10 +43,16 @@ class PostsController < ApplicationController
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
       @post.save_tag(tag_list)
-      redirect_to post
+      redirect_to @post
     else
       render :edit
     end
+  end
+
+  def search_tag
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @posts = @tag.posts
   end
 
   private
