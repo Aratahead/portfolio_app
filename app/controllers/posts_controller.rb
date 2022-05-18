@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: :index
+  PER_PAGE = 10
+
   def index
-    @posts = Post.all
+    @posts = Post.page(params[:page]).per(PER_PAGE)
     @tag_list = Tag.all
   end
 
