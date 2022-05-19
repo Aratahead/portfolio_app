@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   devise_for :users
   resources :posts
   get 'search_tag', to: 'posts#search_tag'
+  get '/toppages', to: 'toppages#index'
 end
