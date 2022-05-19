@@ -4,5 +4,7 @@
   <p><%= form.label :code, "コード" %><%= form.text_area :code %></p>
   <p><%= form.label :comment, "コメント" %><%= form.text_area :comment %></p>
   <p><%= form.label :name ,"タグ"%><%= form.text_area :name%></p>
+  <p><%= form.label :correct, "正誤"%><%= form.select :correct, {"AC":1,"解説AC":2,"WA":3}, { include_blank: '選択してください'}%>
+
   <%= form.submit "登録"%>
 <% end %>
