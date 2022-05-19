@@ -5,3 +5,11 @@
 <% @post_tags.each do |tag|%>
   <p>タグ<%= tag.name %></p>
 <% end %>
+
+<% if @post.correct==1%>
+  <p>正誤:AC</p>
+<% elsif @post.correct==2%>
+  <p>正誤:解説AC</p>
+<% elsif @post.correct==3%>
+  <p>正誤:WA</p>
+<%end%>
