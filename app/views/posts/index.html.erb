@@ -3,6 +3,10 @@
 <%= search_form_for @q do |f|%>
   <%= f.label :question_name, "問題名"%>
   <%= f.search_field :question_name_cont %>
+  <%= f.label :contest_name, "コンテスト名"%>
+  <%= f.select :contest_contest_name_eq,options_from_collection_for_select(Contest.select(:contest_name).distinct,:id,:contest_name,1)%>
+  <%= f.label :contest_number, "コンテストNO."%>
+  <%= f.search_field :contest_contest_number_cont%>
   <%= f.submit%>
 <% end %>
   <% @tag_list.each do |list|%>
