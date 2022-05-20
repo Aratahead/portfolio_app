@@ -3,7 +3,8 @@ class PostsController < ApplicationController
   PER_PAGE = 10
 
   def index
-    @posts = Post.page(params[:page]).per(PER_PAGE)
+    @q = Post.ransack(params[:q])
+    @posts = @q.result.page(params[:page]).per(PER_PAGE)
     @tag_list = Tag.all
   end
 
