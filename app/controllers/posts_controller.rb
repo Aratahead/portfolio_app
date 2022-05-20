@@ -3,7 +3,8 @@ class PostsController < ApplicationController
   PER_PAGE = 10
 
   def index
-    @posts = Post.page(params[:page]).per(PER_PAGE)
+    @q = Post.ransack(params[:q])
+    @posts = @q.result.page(params[:page]).per(PER_PAGE)
     @tag_list = Tag.all
   end
 
@@ -12,9 +13,16 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
+    @post = current_user.posts.new(post_params)
+    contest = params[:post].slice(:contest_name, :contest_number)
+    if Contest.where(contest_name: contest[:contest_name],
+                     contest_number: contest[:contest_number]).count == 0
+      Contest.create(contest_name: contest[:contest_name], contest_number: contest[:contest_number])
+    end
+    @post.contest_id = Contest.find_by(contest_name: contest[:contest_name],
+                                       contest_number: contest[:contest_number]).id
     tag_list = params[:post][:name].split(',')
+
     if @post.save
       @post.save_tag(tag_list)
       redirect_to @post, notice: '投稿しました'
@@ -60,6 +68,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:question_name, :code, :comment, :correct)
+    params.require(:post).permit(:question_name, :code, :comment, :correct, :contest_id)
   end
 end
