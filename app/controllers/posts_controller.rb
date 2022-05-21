@@ -40,6 +40,9 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy!
+    post.tags.pluck(:tag_id).each do |number|
+      Tag.find_by(id: number).delete if Tag.where(id: number).count == 1
+    end
     redirect_to root_path
   end
 
