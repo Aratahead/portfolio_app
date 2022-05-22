@@ -39,10 +39,12 @@ class PostsController < ApplicationController
 
   def destroy
     post = Post.find(params[:id])
+    post_tag_id = post.tags.pluck(:tag_id)
     post.destroy!
-    post.tags.pluck(:tag_id).each do |number|
-      Tag.find_by(id: number).delete if Tag.where(id: number).count == 1
+    post_tag_id.each do |number|
+      Tag.find_by(id: number).delete if PostTag.where(tag_id: number).count.zero?
     end
+    post.destroy!
     redirect_to root_path
   end
 
@@ -56,6 +58,13 @@ class PostsController < ApplicationController
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
       @post.save_tag(tag_list)
+
+      unless @old_tags.blank?
+        @old_tags.each do |tag|
+          Tag.find_by(id: tag.id).delete if PostTag.where(tag_id: tag.id).count.zero?
+        end
+      end
+
       redirect_to @post
     else
       render :edit
