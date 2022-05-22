@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :authenticate_user!
   PER_PAGE = 10
@@ -15,19 +17,15 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     contest = params[:post].slice(:contest_name, :contest_number)
-    if Contest.where(contest_name: contest[:contest_name],
-                     contest_number: contest[:contest_number]).count == 0
-      Contest.create(contest_name: contest[:contest_name], contest_number: contest[:contest_number])
-    end
+    @post.save_contest(contest)
     @post.contest_id = Contest.find_by(contest_name: contest[:contest_name],
                                        contest_number: contest[:contest_number]).id
-    tag_list = params[:post][:name].split(',')
-
+    tag_list = params[:post][:name].split(",")
     if @post.save
       @post.save_tag(tag_list)
-      redirect_to @post, notice: '投稿しました'
+      redirect_to @post
     else
-      flash.now[:alert] = '投稿に失敗しました'
+      flash.now[:alert] = "投稿に失敗しました"
       render :new
     end
   end
@@ -50,16 +48,16 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @tag_list = @post.tags.pluck(:name).join(',')
+    @tag_list = @post.tags.pluck(:name).join(",")
   end
 
   def update
     @post = Post.find(params[:id])
-    tag_list = params[:post][:name].split(',')
+    tag_list = params[:post][:name].split(",")
     if @post.update(post_params)
       @post.save_tag(tag_list)
 
-      unless @old_tags.blank?
+      if @old_tags.present?
         @old_tags.each do |tag|
           Tag.find_by(id: tag.id).delete if PostTag.where(tag_id: tag.id).count.zero?
         end

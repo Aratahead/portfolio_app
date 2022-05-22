@@ -1,8 +1,17 @@
+# frozen_string_literal: true
+
 class Post < ApplicationRecord
   belongs_to :user
   belongs_to :contest
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+
+  def save_contest(sent_contest)
+    if Contest.where(contest_name: sent_contest[:contest_name],
+                     contest_number: sent_contest[:contest_number]).count.zero?
+      Contest.create(contest_name: sent_contest[:contest_name], contest_number: sent_contest[:contest_number])
+    end
+  end
 
   def save_tag(sent_tags)
     current_tags = tags.pluck(:name) unless tags.nil?
@@ -10,7 +19,7 @@ class Post < ApplicationRecord
     new_tags = sent_tags - current_tags
 
     # 古いタグがあれば古いタグを消す
-    unless @old_tags.blank?
+    if @old_tags.present?
       @old_tags.each do |old|
         tags.delete(Tag.find_by(name: old))
       end
