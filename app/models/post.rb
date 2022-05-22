@@ -6,14 +6,14 @@ class Post < ApplicationRecord
 
   def save_tag(sent_tags)
     current_tags = tags.pluck(:name) unless tags.nil?
-    @old_tags = current_tags - sent_tags
+
+    old_tags = current_tags - sent_tags
+
     new_tags = sent_tags - current_tags
 
-    # 古いタグがあれば古いタグを消す
-    unless @old_tags.blank?
-      @old_tags.each do |old|
-        tags.delete(Tag.find_by(name: old))
-      end
+    # 古いタグを消す
+    old_tags.each do |old|
+      tags.delete(Tag.find_by(name: old))
     end
 
     # 新しいタグを保存
