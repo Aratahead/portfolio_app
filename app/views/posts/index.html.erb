@@ -17,6 +17,7 @@
   <% @posts.each.with_index(1) do |post,i| %>
      <p>
      <%= post.contest.contest_name %><%=post.contest.contest_number%>
+     <%= l post.created_at%>
      <%= post.question_name %>
      <%=post.tags.pluck(:name).join('')%>
      <% if post.correct==1%>
@@ -27,6 +28,13 @@
       <p>正誤:WA</p>
      <% end %>
      </p>
+
+     <% if post.review_completion.to_i.zero?%>
+        <%= render "review_incomplete",post: post%>
+      <% else %>
+        <%= render "review_complete",post: post%>
+        <%= l post.review_date%>
+     <%end%>
 
      <%= link_to "詳細",post_path(post) %>
      <%= link_to "編集",edit_post_path(post)%>

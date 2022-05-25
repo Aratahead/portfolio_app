@@ -5,11 +5,21 @@
 <% @post_tags.each do |tag|%>
   <p>タグ<%= tag.name %></p>
 <% end %>
-
 <% if @post.correct==1%>
   <p>正誤:AC</p>
 <% elsif @post.correct==2%>
   <p>正誤:解説AC</p>
 <% elsif @post.correct==3%>
   <p>正誤:WA</p>
+<%end%>
+
+<%= link_to "詳細",post_path(@post) %>
+<%= link_to "編集",edit_post_path(@post)%>
+<%= link_to "削除",post_path(@post), method: :delete, data: { confirm: "削除しますか?" } %>
+
+<% if @post.review_completion.to_i.zero?%>
+  <%= render "review_incomplete",post: @post%>
+<% else %>
+  <%= render "review_complete",post: @post%>
+  <%= l @post.review_date%>
 <%end%>

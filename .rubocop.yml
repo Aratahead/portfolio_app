@@ -1,20 +1,24 @@
 require:
   - rubocop-rails
   - rubocop-performance
-Rails/FilePath:
-  Exclude:
-    - 'portfolio_app/config/environments/development.rb'
+
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 2.7.3
   NewCops: enable # rubocopの新機能をactiveにする
   Exclude:
     - 'assets/**/*'
+    - 'bin/bundle'
     - 'bin/**/*'
     - 'db/schema.rb'
     - 'log/**/*'
     - 'node_modules/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
+    - 'config/environments/development.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'bin/bundle'
 # 日本語のコメントを許可
 Style/AsciiComments:
   Enabled: false
