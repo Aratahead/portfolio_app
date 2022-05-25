@@ -33,6 +33,7 @@
         <%= render "review_incomplete",post: post%>
       <% else %>
         <%= render "review_complete",post: post%>
+        <%= l post.review_date%>
      <%end%>
 
      <%= link_to "詳細",post_path(post) %>
