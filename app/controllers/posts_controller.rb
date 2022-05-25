@@ -75,6 +75,21 @@ class PostsController < ApplicationController
     @posts = @tag.posts
   end
 
+  def review_complete
+    @post = Post.find_by(id: params[:id])
+    @post.review_date = Time.current
+    @post.review_completion = 1
+    @post.save
+    redirect_back(fallback_location: root_path)
+  end
+
+  def review_incomplete
+    @post = Post.find_by(id: params[:id])
+    @post.review_completion = 0
+    @post.save
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def post_params

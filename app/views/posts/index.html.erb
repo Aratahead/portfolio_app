@@ -29,6 +29,12 @@
      <% end %>
      </p>
 
+     <% if post.review_completion.to_i.zero?%>
+        <%= render "review_incomplete",post: post%>
+      <% else %>
+        <%= render "review_complete",post: post%>
+     <%end%>
+
      <%= link_to "詳細",post_path(post) %>
      <%= link_to "編集",edit_post_path(post)%>
      <%= link_to "削除",post_path(post), method: :delete, data: { confirm: "削除しますか?" } %>
