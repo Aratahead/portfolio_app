@@ -43,7 +43,7 @@ class PostsController < ApplicationController
       Tag.find_by(id: number).delete if PostTag.where(tag_id: number).count.zero?
     end
     post.destroy!
-    redirect_to root_path
+    redirect_to posts_path
   end
 
   def edit
@@ -80,19 +80,19 @@ class PostsController < ApplicationController
     @post.review_date = Time.current
     @post.review_completion = 1
     @post.save
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: posts_path)
   end
 
   def review_incomplete
     @post = Post.find_by(id: params[:id])
     @post.review_completion = 0
     @post.save
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: posts_path)
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:question_name, :code, :comment, :correct, :contest_id,:image)
+    params.require(:post).permit(:question_name, :code, :comment, :correct, :contest_id, :image)
   end
 end
