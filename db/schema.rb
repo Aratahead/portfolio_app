@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_23_163054) do
+ActiveRecord::Schema.define(version: 2022_05_26_123335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2022_05_23_163054) do
     t.bigint "contest_id"
     t.datetime "review_date"
     t.integer "review_completion"
+    t.string "image"
     t.index ["contest_id"], name: "index_posts_on_contest_id"
   end
 
