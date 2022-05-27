@@ -1,7 +1,6 @@
-# frozen_string_literal: true
-
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_post, only: %i[show destroy edit update review_complete review_incomplete]
   PER_PAGE = 10
 
   def index
@@ -31,28 +30,24 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @post_tags = @post.tags
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post_tag_id = post.tags.pluck(:tag_id)
-    post.destroy!
+    post_tag_id = @post.tags.pluck(:tag_id)
+    @post.destroy!
     post_tag_id.each do |number|
       Tag.find_by(id: number).delete if PostTag.where(tag_id: number).count.zero?
     end
-    post.destroy!
+    @post.destroy!
     redirect_to posts_path
   end
 
   def edit
-    @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join(",")
   end
 
   def update
-    @post = Post.find(params[:id])
     tag_list = params[:post][:name].split(",")
     if @post.update(post_params)
       @post.save_tag(tag_list)
@@ -76,7 +71,6 @@ class PostsController < ApplicationController
   end
 
   def review_complete
-    @post = Post.find_by(id: params[:id])
     @post.review_date = Time.current
     @post.review_completion = 1
     @post.save
@@ -84,13 +78,16 @@ class PostsController < ApplicationController
   end
 
   def review_incomplete
-    @post = Post.find_by(id: params[:id])
     @post.review_completion = 0
     @post.save
     redirect_back(fallback_location: posts_path)
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:question_name, :code, :comment, :correct, :contest_id, :image)
