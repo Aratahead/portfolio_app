@@ -2,6 +2,10 @@
 <p>問題名<%= @post.question_name %></p>
 <p>コード<%= @post.code%></p>
 <p>コメント<%= @post.comment%></p>
+<p>解説メモ</p>
+<% if @post.image? %>
+  <p>画像<%= image_tag @post.image.url %></p>
+<% end %>
 <% @post_tags.each do |tag|%>
   <p>タグ<%= tag.name %></p>
 <% end %>
