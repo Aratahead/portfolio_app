@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+
+@import 'bootstrap/scss/bootstrap';
+
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/regular';
+/* 以上を追加 */
+
+.field_with_errors {
+  display: contents;
+
+  input {
+    border: 2px solid red;
+  }
+}
+
+.base-container {
+  @extend .container-fluid;
+  padding: 30px 15px;
+}
+
+body {
+  padding-top: 56px;
+}
+
+.navbar-brand {
+  font-size: 25px;
+}
