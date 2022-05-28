@@ -11,6 +11,8 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @contest = Contest.new
+    @tag = @post.tags.pluck(:name).join(",")
   end
 
   def create
@@ -44,20 +46,19 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @tag_list = @post.tags.pluck(:name).join(",")
+    @contest = Contest.find(@post.contest_id)
+    @tag = @post.tags.pluck(:name).join(",")
   end
 
   def update
     tag_list = params[:post][:name].split(",")
     if @post.update(post_params)
       @post.save_tag(tag_list)
-
       if @old_tags.present?
         @old_tags.each do |tag|
           Tag.find_by(id: tag.id).delete if PostTag.where(tag_id: tag.id).count.zero?
         end
       end
-
       redirect_to @post
     else
       render :edit

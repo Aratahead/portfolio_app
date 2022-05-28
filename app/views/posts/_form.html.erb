@@ -1,12 +1,11 @@
 <%= form_with model:@post,local: true do |form|%>
+  <p><%= form.label :contest_name, "コンテスト名" %><%= form.text_field :contest_name ,value: @contest.contest_name%>
+  <p><%= form.label :contest_number,"コンテスト回"%><%= form.text_field :contest_number, value: @contest.contest_number%>
   <p><%= form.label :question_name,"問題名" %><%= form.text_field :question_name %></p>
   <p><%= form.label :code, "コード" %><%= form.text_area :code %></p>
   <p><%= form.label :comment, "コメント" %><%= form.text_area :comment %></p>
   <p><%= form.file_field :image, accept: "image/png,image/jpeg,image/gif"%></p>
-  <p><%= form.label :name ,"タグ"%><%= form.text_area :name%></p>
+  <p><%= form.label :name ,"タグ"%><%= form.text_area :name,value: @tag%></p>
   <p><%= form.label :correct, "正誤"%><%= form.select :correct, {"AC":1,"解説AC":2,"WA":3}, { include_blank: '選択してください'}%>
-  <p><%= form.label :contest_name, "コンテストの種類" %><%= form.text_field :contest_name %>
-  <p><%= form.label :contest_number,"コンテスト回数"%><%= form.text_field :contest_number %>
-
   <%= form.submit "登録"%>
 <% end %>
