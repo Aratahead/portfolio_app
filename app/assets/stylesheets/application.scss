@@ -28,3 +28,16 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
     border: 2px solid red;
   }
 }
+
+.base-container {
+  @extend .container-fluid;
+  padding: 30px 15px;
+}
+
+body {
+  padding-top: 56px;
+}
+
+.navbar-brand {
+  font-size: 25px;
+}
