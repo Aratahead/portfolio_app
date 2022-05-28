@@ -9,6 +9,7 @@
   <%= f.search_field :contest_contest_number_cont%>
   <%= f.submit%>
 <% end %>
+
   <% @tag_list.each do |list|%>
     <%= link_to list.name, search_tag_path(tag_id: list.id) %>
     <%="(#{list.posts.count})" %>

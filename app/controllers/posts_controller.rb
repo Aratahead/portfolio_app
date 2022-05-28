@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result.page(params[:page]).per(PER_PAGE)
+    @posts = @q.result.includes(:user).page(params[:page]).per(PER_PAGE)
     @tag_list = Tag.all
   end
 
