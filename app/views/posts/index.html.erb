@@ -12,7 +12,7 @@
 <% end %>
 
   <% @tag_list.each do |list|%>
-    <%= link_to list.name, search_tag_path(tag_id: list.id) %>
+    <%= link_to list.name, search_tag_path(id: list.id) %>
     <%="(#{list.posts.count})" %>
   <% end %>
 

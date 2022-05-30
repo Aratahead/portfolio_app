@@ -21,6 +21,10 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/regular';
 /* 以上を追加 */
 
+.table {
+  padding: 10px;
+  margin: 10px;
+}
 .field_with_errors {
   display: contents;
 
@@ -40,4 +44,51 @@ body {
 
 .navbar-brand {
   font-size: 25px;
+}
+
+.hljs {
+  padding: 0.5em 1em;
+}
+pre {
+  position: relative;
+  margin-top: 1em;
+}
+code {
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+#selectPre {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  font-size: 14px;
+  background-color: #888888;
+  color: #fff;
+}
+
+.box {
+  position: relative;
+  border: solid 3px #0000cd;
+  border-radius: 15px;
+}
+
+.box-title {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-weight: bold;
+  background-color: white;
+  transform: translateY(-55%) translateX(1em);
+}
+
+.box p {
+  margin: 5px;
+  padding: 5px;
+}
+
+.show-top {
+  left: 10px;
+  font-weight: bold;
 }
