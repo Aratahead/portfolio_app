@@ -1,29 +1,96 @@
-<h1>詳細</h1>
-<p>問題名<%= @post.question_name %></p>
-<p>コード<%= @post.code%></p>
-<p>コメント<%= @post.comment%></p>
-<p>解説メモ</p>
-<% if @post.image? %>
-  <p>画像<%= image_tag @post.image.url %></p>
-<% end %>
-<% @post_tags.each do |tag|%>
-  <p>タグ<%= tag.name %></p>
-<% end %>
-<% if @post.correct==1%>
-  <p>正誤:AC</p>
-<% elsif @post.correct==2%>
-  <p>正誤:解説AC</p>
-<% elsif @post.correct==3%>
-  <p>正誤:WA</p>
-<%end%>
+<h1 class="show-top">詳細情報</h1>
+<%= link_to "編集",edit_post_path(@post),class:"btn btn-primary"%>
+<%= link_to "削除",post_path(@post), method: :delete, data: { confirm: "削除しますか?" },class:"btn btn-danger"%>
+<table class="table">
 
-<%= link_to "詳細",post_path(@post) %>
-<%= link_to "編集",edit_post_path(@post)%>
-<%= link_to "削除",post_path(@post), method: :delete, data: { confirm: "削除しますか?" } %>
+<tbody>
+  <tr>
+  <th scope="row">問題名</th>
+  <td><%= @post.question_name %></td>
+  </tr>
 
-<% if @post.review_completion.to_i.zero?%>
-  <%= render "review_incomplete",post: @post%>
-<% else %>
-  <%= render "review_complete",post: @post%>
-  <%= l @post.review_date%>
-<%end%>
+  <tr>
+  <th scope="row">投稿日</th>
+  <td><%= l @post.created_at %><tr>
+  </tr>
+
+  <tr>
+  <th scope="row">タグ</th>
+  <td>
+  <% @post_tags.each do |tag|%>
+   <%= link_to tag.name,search_tag_path(id: tag.id) %>
+  <% end %>
+  </td>
+  </tr>
+
+  <tr>
+  <th scope="row">結果</th>
+  <% if @post.correct==1%>
+    <td><button type="button" class="btn btn-success" disabled>AC</button></td>
+  <% elsif @post.correct==2%>
+    <td><button type="button" class="btn btn-secondary" disabled>解説AC</button></td>
+  <% elsif @post.correct==3%>
+    <td><button type="button" class="btn btn-warning" disabled>WA</button></td>
+  <%end%>
+  </tr>
+  
+  <% if @post.review_completion.to_i.zero?%>
+    <tr><th scope="row">復習状態</th><td><button type="button" class="btn btn-outline-danger" ><%= render "review_incomplete",post: @post%></button></td></tr>
+  <% else %>
+    <tr><th scope="row">復習状態</th><td><button type="button" class="btn btn-outline-success" disabled><%= render "review_complete",post: @post%></button></td></tr>
+    <tr><th scope="row">復習日</th><td><%= l @post.review_date%></td></tr>
+  <%end%>
+</tbody>
+</table>
+
+
+
+
+<div>
+<pre><code class="code"><%= @post.code%></code></pre>
+</div>
+
+<script>hljs.highlightAll();</script>
+
+<script defer>
+;(function(d){
+if(!window.getSelection){
+  return
+}
+var btn = d.createElement("button")
+btn.id = "selectPre"
+btn.textContent = "Copy"
+btn.addEventListener("click", selectPre, false)
+function selectPre(){
+  var sel = window.getSelection()
+  var pre = this.parentNode
+  sel.selectAllChildren(pre)
+  sel.extend(pre, pre.childNodes.length-1)
+  d.execCommand('copy')
+}
+var pres = d.getElementsByTagName("code")
+for(var i=pres.length; i--;){
+  pres[i].addEventListener("mouseover", addBtn, false)
+}
+function addBtn(e){
+  if(this === addBtn.ele) return 
+  this.appendChild(btn)
+  return addBtn.ele = this
+}
+})(document)
+</script>
+
+
+<div class="box">
+  <span class="box-title">コメント</span>
+  <p class="comment"><%= @post.comment%></p>
+</div>
+
+
+<p><% if @post.image? %>
+  <p>解説メモ<%= image_tag @post.image.url %></p>
+<% end %>
+</p>
+
+
+
