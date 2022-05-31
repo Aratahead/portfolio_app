@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @contest = Contest.new
-    @tag = @post.tags.pluck(:name).join(",")
+    @tag = @post.tags.pluck(:name).join(" ")
   end
 
   def create
@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     @post.save_contest(contest)
     @post.contest_id = Contest.find_by(contest_name: contest[:contest_name],
                                        contest_number: contest[:contest_number]).id
-    tag_list = params[:post][:name].split(",")
+    tag_list = params[:post][:name].split(" ")
     if @post.save
       @post.save_tag(tag_list)
       redirect_to @post
@@ -47,11 +47,11 @@ class PostsController < ApplicationController
 
   def edit
     @contest = Contest.find(@post.contest_id)
-    @tag = @post.tags.pluck(:name).join(",")
+    @tag = @post.tags.pluck(:name).join(" ")
   end
 
   def update
-    tag_list = params[:post][:name].split(",")
+    tag_list = params[:post][:name].split(" ")
     if @post.update(post_params)
       @post.save_tag(tag_list)
       if @old_tags.present?

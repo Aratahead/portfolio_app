@@ -1,11 +1,45 @@
 <%= form_with model:@post,local: true do |form|%>
-  <p><%= form.label :contest_name, "コンテスト名" %><%= form.text_field :contest_name ,value: @contest.contest_name%>
-  <p><%= form.label :contest_number,"コンテスト回"%><%= form.text_field :contest_number, value: @contest.contest_number%>
-  <p><%= form.label :question_name,"問題名" %><%= form.text_field :question_name %></p>
-  <p><%= form.label :code, "コード" %><%= form.text_area :code %></p>
-  <p><%= form.label :comment, "コメント" %><%= form.text_area :comment %></p>
-  <p><%= form.file_field :image, accept: "image/png,image/jpeg,image/gif"%></p>
-  <p><%= form.label :name ,"タグ"%><%= form.text_area :name,value: @tag%></p>
-  <p><%= form.label :correct, "正誤"%><%= form.select :correct, {"AC":1,"解説AC":2,"WA":3}, { include_blank: '選択してください'}%>
-  <%= form.submit "登録"%>
+  <div class="form-group">
+    <%= form.label :contest_name, "コンテスト名" %>
+    <%= form.text_field :contest_name ,value: @contest.contest_name,class: "form-control contest-name"%>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :contest_number,"コンテスト回"%>
+    <%= form.text_field :contest_number, value: @contest.contest_number,class: "form-control contest-number"%>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :question_name,"問題名" %>
+    <%= form.text_field :question_name,class: "form-control question-name"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :name ,"タグ"%>
+    <p>関連するタグを半角スペースで入力(例:動的計画法 苦手)</p>
+    <%= form.text_field :name,value: @tag,class: "form-control" %>
+  </div>
+  
+  <%= form.label :correct, "正誤"%>
+  <%= form.select :correct, {"AC":1,"解説AC":2,"WA":3}, { include_blank: '選択してください'},class: "form-control correct"%>
+
+  <div class="form-group">
+    <%= form.label :code, "コード" %>
+    <%= form.text_area :code,class: "form-control ",size:"10x20"%>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :comment, "コメント" %>
+    <%= form.text_area :comment,class: "form-control",size:"10x10"%>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :comment, "メモ" %>
+    <p>メモ書きやPDFがあればこちらにどうぞ</p>
+    <%= form.file_field :image, accept: "image/png,image/jpeg,image/gif"%>
+  </div>
+
+
+<%= form.submit "登録"%>
 <% end %>
