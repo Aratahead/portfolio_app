@@ -1,5 +1,5 @@
 
-<h1>記録一覧</h1>
+<h1 class="index-top">記録一覧</h1>
 <% if user_signed_in? %>
 <%= search_form_for @q do |f|%>
   <%= f.label :contest_name, "コンテスト名"%>
@@ -11,37 +11,57 @@
   <%= f.submit%>
 <% end %>
 
-  <% @tag_list.each do |list|%>
-    <%= link_to list.name, search_tag_path(id: list.id) %>
-    <%="(#{list.posts.count})" %>
-  <% end %>
 
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th scope="col">コンテスト</th>
+      <th scope="col">投稿日</th>
+      <th scope="col">問題名</th>
+      <th scope="col">タグ</th>
+      <th scope="col">正誤</th>
+      <th scope="col">復習状態</th>
+      <th scope="col">その他</th>
+
+
+  </thead>
+  <tbody>
   <% @posts.each.with_index(1) do |post,i| %>
-     <p>
-     <%= post.contest.contest_name %><%=post.contest.contest_number%>
-     <%= l post.created_at%>
-     <%= post.question_name %>
-     <%=post.tags.pluck(:name).join('')%>
-     <% if post.correct==1%>
-      <p>正誤:AC</p>
-      <% elsif post.correct==2%>
-      <p>正誤:解説AC</p>
-      <% elsif post.correct==3%>
-      <p>正誤:WA</p>
+     <tr>
+     <td><%= post.contest.contest_name %><%=post.contest.contest_number%></td>
+
+     <td><%= l post.created_at%></td>
+
+     <td><%= post.question_name %></td>
+
+     <td><% post.tags.each do |tag|%>
+        <%= link_to tag.name, search_tag_path(id: tag.id) %>
      <% end %>
-     </p>
+     </td>
 
-     <% if post.review_completion.to_i.zero?%>
-        <%= render "review_incomplete",post: post%>
-      <% else %>
-        <%= render "review_complete",post: post%>
-        <%= l post.review_date%>
-     <%end%>
+     <% if post.correct==1%>
+      <td><button type="button" class="btn btn-success" disabled>AC</button></td>
+      <% elsif post.correct==2%>
+      <td><button type="button" class="btn btn-secondary" disabled>解説AC</button></td>
+      <% elsif post.correct==3%>
+      <td><button type="button" class="btn btn-warning" disabled>WA</button></td>
+     <% end %>
 
-     <%= link_to "詳細",post_path(post) %>
-     <%= link_to "編集",edit_post_path(post)%>
-     <%= link_to "削除",post_path(post), method: :delete, data: { confirm: "削除しますか?" } %>
 
+    <% if post.review_completion.to_i.zero?%>
+    <td><button type="button" class="btn btn-outline-danger" ><%= render "review_incomplete",post: post%></button></td>
+    <% else %>
+    <td><button type="button" class="btn btn-outline-success" disabled><%= render "review_complete",post: post%></button>
+    <%end%>
+    
+
+    <td class="text-nowrap">
+     <%= link_to "詳細",post_path(post),class:"btn btn-success"%>
+     <%= link_to "編集",edit_post_path(post),class:"btn btn-primary"%>
+     <%= link_to "削除",post_path(post), method: :delete, data: { confirm: "削除しますか?" },class:"btn btn-danger"%>
+    </td>
   <% end %>
+  </tbody>
+</table>
 <% end %>
 <%= paginate @posts%>
