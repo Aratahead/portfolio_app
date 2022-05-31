@@ -1,7 +1,7 @@
 <h1 class="show-top">詳細情報</h1>
 <%= link_to "編集",edit_post_path(@post),class:"btn btn-primary"%>
 <%= link_to "削除",post_path(@post), method: :delete, data: { confirm: "削除しますか?" },class:"btn btn-danger"%>
-<table class="table">
+<table class="table table-bordered table-striped">
 
 <tbody>
   <tr>
@@ -11,8 +11,8 @@
 
   <tr>
   <th scope="row">投稿日</th>
-  <td><%= l @post.created_at %><tr>
-  </tr>
+  <td><%= l @post.created_at %></td>
+  </>
 
   <tr>
   <th scope="row">タグ</th>
