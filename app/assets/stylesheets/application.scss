@@ -125,3 +125,11 @@ code {
 h1 {
   font-weight: bold;
 }
+
+.alert-notice {
+  @extend .alert-info;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+}
