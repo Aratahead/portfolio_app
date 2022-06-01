@@ -21,7 +21,9 @@
     <main>
       <%= render "layouts/flash" %>
       <div class="base-container">
-        <%= yield %>
+        <div class="container-fluid py-4 mw-md">
+          <%= yield %>
+        </div>
       </div>
     </main>
   </body>
