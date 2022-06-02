@@ -35,7 +35,7 @@
      <td><%= post.question_name %></td>
 
      <td><% post.tags.each do |tag|%>
-        <%= link_to tag.name, search_tag_path(id: tag.id) %>
+        <%= link_to tag.name, search_tag_path(id: tag.id),class:"btn btn-link"%>
      <% end %>
      </td>
 
