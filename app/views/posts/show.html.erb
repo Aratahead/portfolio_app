@@ -12,13 +12,13 @@
   <tr>
   <th scope="row">投稿日</th>
   <td><%= l @post.created_at %></td>
-  </>
+  </tr>
 
   <tr>
   <th scope="row">タグ</th>
   <td>
   <% @post_tags.each do |tag|%>
-   <%= link_to tag.name,search_tag_path(id: tag.id) %>
+   <%= link_to tag.name,search_tag_path(id: tag.id),class:"btn btn-link"%>
   <% end %>
   </td>
   </tr>

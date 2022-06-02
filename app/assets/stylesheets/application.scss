@@ -133,3 +133,8 @@ h1 {
 .alert-alert {
   @extend .alert-danger;
 }
+
+.pagination {
+  justify-content: center;
+  margin: 10px;
+}
