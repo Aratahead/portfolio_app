@@ -133,3 +133,22 @@ h1 {
 .alert-alert {
   @extend .alert-danger;
 }
+
+.main-container {
+  background-image: url('/images/pexels-kevin-ku-577585.jpg');
+  height: 800px;
+  width: 400;
+  background-size: cover;
+}
+
+.main-container h1 {
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+.main-container p {
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
