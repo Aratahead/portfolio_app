@@ -39,10 +39,10 @@ ActiveRecord::Schema.define(version: 2022_05_26_123335) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "correct"
+    t.integer "correct", null: false
     t.bigint "contest_id"
     t.datetime "review_date"
-    t.integer "review_completion"
+    t.integer "review_completion", default: 0
     t.string "image"
     t.index ["contest_id"], name: "index_posts_on_contest_id"
   end

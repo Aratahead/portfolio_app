@@ -21,7 +21,8 @@
   </div>
   
   <%= form.label :correct, "正誤"%>
-  <%= form.select :correct, {"AC":1,"解説AC":2,"WA":3}, { include_blank: '選択してください'},class: "form-control correct"%>
+  <%= form.select :correct,Post.corrects.keys%>
+
 
   <div class="form-group">
     <%= form.label :code, "コード" %>

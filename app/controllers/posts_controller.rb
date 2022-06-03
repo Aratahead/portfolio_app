@@ -22,6 +22,10 @@ class PostsController < ApplicationController
     @post.contest_id = Contest.find_by(contest_name: contest[:contest_name],
                                        contest_number: contest[:contest_number]).id
     tag_list = params[:post][:name].split(" ")
+    if @post.correct == "AC"
+      @post.review_completion = 1
+      @post.review_date = Time.current
+    end
     if @post.save
       @post.save_tag(tag_list)
       redirect_to @post
@@ -52,6 +56,10 @@ class PostsController < ApplicationController
 
   def update
     tag_list = params[:post][:name].split(" ")
+    if @post.correct == "AC"
+      @post.review_completion = 1
+      @post.review_date = Time.current
+    end
     if @post.update(post_params)
       @post.save_tag(tag_list)
       if @old_tags.present?

@@ -5,6 +5,15 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
 
+  enum correct: {
+    AC: 1,
+    解説AC: 2,
+    TLE: 3,
+    WA: 4
+  }
+
+  enum review_completion:{未完了: 0,復習完了: 1}
+
   def save_contest(sent_contest)
     if Contest.where(contest_name: sent_contest[:contest_name],
                      contest_number: sent_contest[:contest_number]).count.zero?
