@@ -3,16 +3,21 @@
 <% if user_signed_in? %>
 <%= search_form_for @q do |f|%>
   <%= f.label :contest_name, "コンテスト名"%>
-  <%= f.search_field :contest_contest_name_eq %>
+  <%= f.search_field :contest_contest_name_eq,placeholder: "コンテスト名",class:"input input_contest_name"%>
   <%= f.label :contest_number, "コンテストNO."%>
-  <%= f.number_field :contest_contest_number_eq%>
-  <%= f.label :question_name, "問題名"%>
-  <%= f.search_field :question_name_cont %>
+  <%= f.number_field :contest_contest_number_eq,placeholder: "コンテストNO.",class:"input input_contest_number"%>
+  <%= f.label :created_at,"投稿日"%>
+  <%= f.date_field :created_at_gteq,include_blank: true%>~
+  <%= f.date_field :created_at_lteq,include_blank: true%>
+  <br><%= f.label :question_name, "問題名"%>
+  <%= f.search_field :question_name_cont,placeholder: "問題名",class:"input input_question_name"%>
+  <%= f.label :tag_name,"タグ"%>
+  <%= f.search_field :tags_name_eq,placeholder: "タグ",class:"input input_tag_name"%>
   <%= f.label :correct, "正誤"%>
-  <%= f.select :correct_eq,options_for_select({AC:1,解説AC:2,TLE:3,WA:4})%>
+  <%= f.select :correct_eq,options_for_select({AC:1,解説AC:2,TLE:3,WA:4}),{include_blank:"選択なし"},class:"select input_correct"%>
   <%= f.label :review_completion, "復習状態"%>
-  <%= f.select :review_completion_eq,options_for_select({未完了: 0,復習完了: 1})%>
-  <%= f.submit%>
+  <%= f.select :review_completion_eq,options_for_select({未完了: 0,復習完了: 1}),{include_blank: "選択なし"},class:"select input_review_completion"%>
+  <%= f.submit nil ,class: 'btn btn-primary'%>
 <% end %>
 
 
