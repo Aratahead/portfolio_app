@@ -1,7 +1,7 @@
 
 <h1 class="index-top">記録一覧</h1>
 <% if user_signed_in? %>
-<%= search_form_for @q do |f|%>
+<%= search_form_for(@q, url:search_path) do |f|%>
 <div class="research">
   <%= f.label :contest_name, "コンテスト名"%>
   <%= f.search_field :contest_contest_name_eq,placeholder: "コンテスト名",class:"input input_contest_name "%>

@@ -73,10 +73,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    @q = Post.ransack(search_params)
+    @posts = @q.result.page(params[:page]).per(PER_PAGE)
+  end
+
   def search_tag
     @tag_list = Tag.all
     @tag = Tag.find(params[:id])
-    @posts = @tag.posts
+    @posts = @tag.posts.page(params[:page]).per(PER_PAGE)
   end
 
   def review_complete
@@ -93,6 +98,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def search_params
+    params.require(:q).permit!
+  end
 
   def set_post
     @post = Post.find(params[:id])

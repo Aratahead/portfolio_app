@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     passwords: "users/passwords"
   }
+  get "search", to: "posts#search"
   resources :posts
   get "search_tag", to: "posts#search_tag"
   post "/review_complete/:id", to: "posts#review_complete", as: "review_complete"
