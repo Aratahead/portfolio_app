@@ -22,6 +22,10 @@ class PostsController < ApplicationController
     @post.contest_id = Contest.find_by(contest_name: contest[:contest_name],
                                        contest_number: contest[:contest_number]).id
     tag_list = params[:post][:name].split(" ")
+    if @post.correct == "AC"
+      @post.review_completion = 1
+      @post.review_date = Time.current
+    end
     if @post.save
       @post.save_tag(tag_list)
       redirect_to @post
@@ -52,6 +56,10 @@ class PostsController < ApplicationController
 
   def update
     tag_list = params[:post][:name].split(" ")
+    if @post.correct == "AC"
+      @post.review_completion = 1
+      @post.review_date = Time.current
+    end
     if @post.update(post_params)
       @post.save_tag(tag_list)
       if @old_tags.present?
@@ -65,10 +73,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    @q = Post.ransack(search_params)
+    @posts = @q.result.page(params[:page]).per(PER_PAGE)
+  end
+
   def search_tag
     @tag_list = Tag.all
     @tag = Tag.find(params[:id])
-    @posts = @tag.posts
+    @posts = @tag.posts.page(params[:page]).per(PER_PAGE)
   end
 
   def review_complete
@@ -85,6 +98,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def search_params
+    params.require(:q).permit!
+  end
 
   def set_post
     @post = Post.find(params[:id])

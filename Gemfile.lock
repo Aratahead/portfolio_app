@@ -89,6 +89,8 @@ GEM
     devise-i18n (1.10.2)
       devise (>= 4.8.0)
     devise-i18n-views (0.3.7)
+    enum_help (0.0.19)
+      activesupport (>= 3.0.0)
     erubi (1.10.0)
     ffi (1.15.5)
     font-awesome-sass (6.1.1)
@@ -279,6 +281,7 @@ DEPENDENCIES
   devise
   devise-i18n
   devise-i18n-views
+  enum_help (~> 0.0.15)
   font-awesome-sass
   jbuilder (~> 2.7)
   jquery-rails

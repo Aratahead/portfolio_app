@@ -25,20 +25,20 @@
 
   <tr>
   <th scope="row">結果</th>
-  <% if @post.correct==1%>
-    <td><button type="button" class="btn btn-success" disabled>AC</button></td>
-  <% elsif @post.correct==2%>
-    <td><button type="button" class="btn btn-secondary" disabled>解説AC</button></td>
-  <% elsif @post.correct==3%>
-    <td><button type="button" class="btn btn-warning" disabled>WA</button></td>
+  <%if @post.correct=="AC"%>
+  <td><button type="button" class="btn btn-success" disabled><%= @post.correct %></button></td>
+  <% elsif @post.correct=="解説AC"%>
+    <td><button type="button" class="btn btn-secondary" disabled><%= @post.correct %></button></td>
+  <%else%>
+    <td><button type="button" class="btn btn-warning" disabled><%= @post.correct %></button></td>
   <%end%>
   </tr>
   
-  <% if @post.review_completion.to_i.zero?%>
+  <% if @post.review_completion=="未完了"%>
     <tr><th scope="row">復習状態</th><td><button type="button" class="btn btn-outline-danger" ><%= render "review_incomplete",post: @post%></button></td></tr>
   <% else %>
     <tr><th scope="row">復習状態</th><td><button type="button" class="btn btn-outline-success" disabled><%= render "review_complete",post: @post%></button></td></tr>
-    <tr><th scope="row">復習日</th><td><%= l @post.review_date%></td></tr>
+    <tr><th scope="row">最終復習日</th><td><%= l @post.review_date%></td></tr>
   <%end%>
 </tbody>
 </table>
@@ -91,6 +91,6 @@ function addBtn(e){
   <p>解説メモ<%= image_tag @post.image.url %></p>
 <% end %>
 </p>
-
+<%= link_to "一覧に戻る", posts_path,class:"btn btn-dark"%>
 
 
