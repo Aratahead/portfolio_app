@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: %i[show destroy edit update review_complete review_incomplete]
+  before_action :set_post_contest, only: %i[show destroy edit update review_complete review_incomplete]
   PER_PAGE = 10
 
   def index
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
     end
     if @post.save
       @post.save_tag(tag_list)
-      redirect_to @post
+      redirect_to @post, notice: "投稿しました"
     else
       flash.now[:alert] = "投稿に失敗しました"
       render :new
@@ -46,11 +46,10 @@ class PostsController < ApplicationController
       Tag.find_by(id: number).delete if PostTag.where(tag_id: number).count.zero?
     end
     @post.destroy!
-    redirect_to posts_path
+    redirect_to posts_path, alert: "削除しました"
   end
 
   def edit
-    @contest = Contest.find(@post.contest_id)
     @tag = @post.tags.pluck(:name).join(" ")
   end
 
@@ -67,7 +66,7 @@ class PostsController < ApplicationController
           Tag.find_by(id: tag.id).delete if PostTag.where(tag_id: tag.id).count.zero?
         end
       end
-      redirect_to @post
+      redirect_to @post, notice: "更新しました"
     else
       render :edit
     end
@@ -103,8 +102,9 @@ class PostsController < ApplicationController
     params.require(:q).permit!
   end
 
-  def set_post
+  def set_post_contest
     @post = Post.find(params[:id])
+    @contest = Contest.find(@post.contest_id)
   end
 
   def post_params
