@@ -4,8 +4,9 @@ class Post < ApplicationRecord
   belongs_to :contest
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
-  validates :question_name, precense: true
-  validates :code, precense: true
+  validates :question_name, presence: true
+  validates :code, presence: true
+  validates :correct, presence: true
 
   enum correct: {
     AC: 1,

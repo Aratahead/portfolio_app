@@ -3,5 +3,5 @@
 class Contest < ApplicationRecord
   has_many :posts, dependent: :destroy
   validates :contest_name, presence: true
-  validates :contest_number, precense: true
+  validates :contest_number, presence: true
 end
