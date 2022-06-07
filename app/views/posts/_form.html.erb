@@ -1,46 +1,47 @@
 <%= form_with model:@post,local: true do |form|%>
   <div class="form-group">
     <%= form.label :contest_name, "コンテスト名" %>
-    <%= form.text_field :contest_name ,value: @contest.contest_name,class: "form-control contest-name"%>
+    <%= form.text_field :contest_name ,required: true,value: @contest.contest_name,class: "form-control contest-name form",placeholder:"ABC"%>
   </div>
 
   <div class="form-group">
     <%= form.label :contest_number,"コンテスト回"%>
-    <%= form.text_field :contest_number, value: @contest.contest_number,class: "form-control contest-number"%>
+    <%= form.text_field :contest_number,required: true,value: @contest.contest_number,class: "form-control contest-number form",placeholder:"1"%>
   </div>
 
   <div class="form-group">
     <%= form.label :question_name,"問題名" %>
-    <%= form.text_field :question_name,class: "form-control question-name"  %>
+    <%= form.text_field :question_name,required: true,class: "form-control question-name form",placeholder:"max-min-problem"%>
   </div>
 
   <div class="form-group">
     <%= form.label :name ,"タグ"%>
-    <p>関連するタグを半角スペースで入力(例:動的計画法 苦手)</p>
-    <%= form.text_field :name,value: @tag,class: "form-control" %>
+    <p>関連するタグを半角スペースで入力</p>
+    <%= form.text_field :name,value: @tag,class: "form-control form" ,placeholder:"動的計画法 苦手"%>
   </div>
   
-  <%= form.label :correct, "正誤"%>
-  <%= form.select :correct,Post.corrects.keys%>
+  <%= form.label :correct, "正誤"%><br>
+  <%= form.select :correct,Post.corrects.keys,class: "form"%>
 
 
   <div class="form-group">
     <%= form.label :code, "コード" %>
-    <%= form.text_area :code,class: "form-control ",size:"10x20"%>
+    <%= form.text_area :code,required: true,class: "form-control form",size:"10x20",placeholder:"print(Hello World)"%>
   </div>
 
 
   <div class="form-group">
     <%= form.label :comment, "コメント" %>
-    <%= form.text_area :comment,class: "form-control",size:"10x10"%>
+    <p>TeX記法で数式表示可</p>
+    <%= form.text_area :comment,class: "form-control form",size:"10x10",placeholder:"難しかった,要復習,e^{a+b}"%>
   </div>
 
   <div class="form-group">
-    <%= form.label :comment, "メモ" %>
-    <p>メモ書きやPDFがあればこちらへ</p>
+    <%= form.label :image, "メモ" %>
+    <p>メモ画像があればこちらへ</p>
     <%= form.file_field :image, accept: "image/png,image/jpeg,image/gif"%>
   </div>
 
 
-<%= form.submit "登録"%>
+<%= form.submit button_value%>
 <% end %>

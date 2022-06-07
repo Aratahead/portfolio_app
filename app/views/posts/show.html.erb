@@ -1,9 +1,14 @@
 <h1 class="show-top">詳細情報</h1>
-<%= link_to "編集",edit_post_path(@post),class:"btn btn-primary"%>
-<%= link_to "削除",post_path(@post), method: :delete, data: { confirm: "削除しますか?" },class:"btn btn-danger"%>
-<table class="table table-bordered table-striped">
+<%= link_to "編集",edit_post_path(@post),class:"btn btn-primary mb-3"%>
+<%= link_to "削除",post_path(@post), method: :delete, data: { confirm: "削除しますか?" },class:"btn btn-danger mb-3"%>
+<table class="table table-bordered table-striped show">
 
 <tbody>
+  <tr>
+  <th scope="row">コンテスト</th>
+  <td><%= @post.contest.contest_name %><%=@post.contest.contest_number%></td>
+  </tr>
+  
   <tr>
   <th scope="row">問題名</th>
   <td><%= @post.question_name %></td>
@@ -87,10 +92,10 @@ function addBtn(e){
 </div>
 
 
-<p><% if @post.image? %>
-  <p>解説メモ<%= image_tag @post.image.url %></p>
+<% if @post.image? %>
+  <span class="memo-title">解説メモ</span>
+  <p class="image"><%= image_tag @post.image.url %></p>
 <% end %>
-</p>
-<%= link_to "一覧に戻る", posts_path,class:"btn btn-dark"%>
+<%= link_to "一覧に戻る", posts_path,class:"btn btn-dark mt-3"%>
 
 

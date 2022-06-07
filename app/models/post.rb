@@ -4,6 +4,9 @@ class Post < ApplicationRecord
   belongs_to :contest
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+  validates :question_name, presence: true
+  validates :code, presence: true
+  validates :correct, presence: true
 
   enum correct: {
     AC: 1,
@@ -12,14 +15,7 @@ class Post < ApplicationRecord
     WA: 4
   }
 
-  enum review_completion:{未完了: 0,復習完了: 1}
-
-  def save_contest(sent_contest)
-    if Contest.where(contest_name: sent_contest[:contest_name],
-                     contest_number: sent_contest[:contest_number]).count.zero?
-      Contest.create(contest_name: sent_contest[:contest_name], contest_number: sent_contest[:contest_number])
-    end
-  end
+  enum review_completion: { 未完了: 0, 復習完了: 1 }
 
   def save_tag(sent_tags)
     current_tags = tags.pluck(:name) unless tags.nil?

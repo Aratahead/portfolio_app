@@ -9,3 +9,26 @@ ja:
       previous: '前'
       next: '次'
       truncate: '...'
+  activerecord:
+    models:
+      post: 投稿
+    attributes:
+      post:
+        question_name: 問題名
+        comment: コメント
+        code: コード
+        correct: 正誤
+        review_date: 復習日
+  activerecord:
+    models:
+      tag: タグ
+    attributes:
+      post:
+        name: タグ名
+  activerecord:
+    models:
+      contest: タグ
+    attributes:
+      post:
+        contest_name: コンテスト名
+        contest_number: コンテスト回

@@ -28,5 +28,5 @@ class ImageUploader < CarrierWave::Uploader::Base
     model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
   end
 
-  process resize_to_limit: [500, 500]
+  process resize_to_limit: [750, 1000]
 end

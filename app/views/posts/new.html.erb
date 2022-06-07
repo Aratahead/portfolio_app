@@ -1,2 +1,4 @@
 <h1>新規記録</h1>
-<%= render "form" %>
+<%= render "form",button_value: "投稿"%>
+<%= link_to "前の画面に戻る",:back,class:"btn btn-dark mt-3"%>
+<%= link_to "一覧に戻る", posts_path,class:"btn btn-dark mt-3"%>
