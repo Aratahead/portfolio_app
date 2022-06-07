@@ -4,23 +4,25 @@ class PostsController < ApplicationController
   PER_PAGE = 10
 
   def index
-    @q = Post.ransack(params[:q])
+    @q = current_user.posts.ransack(params[:q])
     @posts = @q.result.page(params[:page]).per(PER_PAGE)
     @tag_list = Tag.all
   end
 
   def new
-    @post = Post.new
     @contest = Contest.new
+    @post = @contest.posts.new
     @tag = @post.tags.pluck(:name).join(" ")
   end
 
   def create
+    @contest = Contest.new(contest_params)
+    unless @contest.save
+      flash.now[:alert] = "投稿に失敗しました"
+      render :new
+    end
     @post = current_user.posts.new(post_params)
-    contest = params[:post].slice(:contest_name, :contest_number)
-    @post.save_contest(contest)
-    @post.contest_id = Contest.find_by(contest_name: contest[:contest_name],
-                                       contest_number: contest[:contest_number]).id
+    @post.contest_id = @contest.id
     tag_list = params[:post][:name].split(" ")
     if @post.correct == "AC"
       @post.review_completion = 1
@@ -59,7 +61,7 @@ class PostsController < ApplicationController
       @post.review_completion = 1
       @post.review_date = Time.current
     end
-    if @post.update(post_params)
+    if @post.update(post_params) && @contest.update(contest_params)
       @post.save_tag(tag_list)
       if @old_tags.present?
         @old_tags.each do |tag|
@@ -68,12 +70,13 @@ class PostsController < ApplicationController
       end
       redirect_to @post, notice: "更新しました"
     else
+      flash.now[:alert] = "更新に失敗しました"
       render :edit
     end
   end
 
   def search
-    @q = Post.ransack(search_params)
+    @q = current_user.posts.ransack(search_params)
     @posts = @q.result.page(params[:page]).per(PER_PAGE)
   end
 
@@ -109,5 +112,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:question_name, :code, :comment, :correct, :contest_id, :image)
+  end
+
+  def contest_params
+    params.require(:post).permit(:contest_name, :contest_number)
   end
 end

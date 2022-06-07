@@ -17,13 +17,6 @@ class Post < ApplicationRecord
 
   enum review_completion: { 未完了: 0, 復習完了: 1 }
 
-  def save_contest(sent_contest)
-    if Contest.where(contest_name: sent_contest[:contest_name],
-                     contest_number: sent_contest[:contest_number]).count.zero?
-      Contest.create(contest_name: sent_contest[:contest_name], contest_number: sent_contest[:contest_number])
-    end
-  end
-
   def save_tag(sent_tags)
     current_tags = tags.pluck(:name) unless tags.nil?
     @old_tags = current_tags - sent_tags

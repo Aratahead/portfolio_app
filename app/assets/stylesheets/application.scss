@@ -198,3 +198,11 @@ h1.index-top {
 .show-table {
   margin-top: 20px;
 }
+
+div.field_with_errors {
+  display: contents;
+
+  input {
+    border: 2px solid red;
+  }
+}
