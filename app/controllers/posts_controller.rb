@@ -4,9 +4,8 @@ class PostsController < ApplicationController
   PER_PAGE = 10
 
   def index
-    @q = current_user.posts.includes(:contest).ransack(params[:q])
+    @q = current_user.posts.includes(:contest, :tags).ransack(params[:q])
     @posts = @q.result.page(params[:page]).per(PER_PAGE)
-    @tag_list = Tag.all
   end
 
   def new
