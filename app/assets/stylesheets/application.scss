@@ -29,13 +29,8 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   }
 }
 
-.base-container {
-  @extend .container-fluid;
-  padding: 30px 15px;
-}
-
 body {
-  padding-top: 56px;
+  padding-top: 42px;
 }
 
 .navbar-brand {
@@ -77,6 +72,16 @@ code {
   font-weight: bold;
   background-color: white;
   transform: translateY(-55%) translateX(1em);
+}
+
+footer {
+  color: #808080;
+  background: #e5e5e5;
+  padding: 30px;
+}
+
+footer p {
+  text-align: center;
 }
 
 .box p {
@@ -127,13 +132,6 @@ code {
 
 .alert-alert {
   @extend .alert-danger;
-}
-
-.main-container {
-  background-image: url('/images/pexels-kevin-ku-577585.jpg');
-  height: 800px;
-  width: 400;
-  background-size: cover;
 }
 
 .main-container h1 {

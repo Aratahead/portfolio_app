@@ -54,42 +54,13 @@
 <div>
 <pre><code class="code"><%= @post.code%></code></pre>
 </div>
-
-<script>hljs.highlightAll();</script>
-
-<script defer>
-;(function(d){
-if(!window.getSelection){
-  return
-}
-var btn = d.createElement("button")
-btn.id = "selectPre"
-btn.textContent = "Copy"
-btn.addEventListener("click", selectPre, false)
-function selectPre(){
-  var sel = window.getSelection()
-  var pre = this.parentNode
-  sel.selectAllChildren(pre)
-  sel.extend(pre, pre.childNodes.length-1)
-  d.execCommand('copy')
-}
-var pres = d.getElementsByTagName("code")
-for(var i=pres.length; i--;){
-  pres[i].addEventListener("mouseover", addBtn, false)
-}
-function addBtn(e){
-  if(this === addBtn.ele) return 
-  this.appendChild(btn)
-  return addBtn.ele = this
-}
-})(document)
-</script>
-
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <div class="box">
   <span class="box-title">コメント</span>
   <p class="comment"><%= @post.comment%></p>
 </div>
+<script>hljs.highlightAll();</script>
 
 
 <% if @post.image? %>
