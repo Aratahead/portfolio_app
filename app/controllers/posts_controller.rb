@@ -82,7 +82,7 @@ class PostsController < ApplicationController
   def search_tag
     @tag_list = Tag.all
     @tag = Tag.find(params[:id])
-    @posts = @tag.posts.page(params[:page]).per(PER_PAGE)
+    @posts = @tag.posts.includes(:contest, :tags).page(params[:page]).per(PER_PAGE)
   end
 
   def review_complete
