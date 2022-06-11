@@ -1,33 +1,70 @@
-<%= render 'layouts/flash_messages' %>
+<section class="wrapper">
+    <div class="container">
+        <div class="content">
+        <p class="title">CodeMemory</p>
+        <p class="phrase">CodeMemoryは競技プログラミングの復習をサポートするサービスです</p>
+        <div class="top-botton">
+        <%= link_to "新規登録",new_user_registration_path,class:"btn btn-danger btn-lg"%>
+        <%= link_to "ログイン", new_user_session_path,class:"btn btn-primary btn-lg"%>
+        <%= link_to "ゲストログイン", user_guest_sign_in_path,method: :post,class:"btn btn-primary btn-lg" %>
+        </div>
+    </div>
+</section>
 
-<div class="toppage">
-<%= render 'layouts/flash_messages' %>
-<div class="main-container">
-  <h1>CodeMemory</h1>
-  <p>CodeMemoryは競プロプレイヤーの復習をサポートするサービスです</p>
-</div>
-</div>
+<section class="content">
+    <div class="container">
+        <div class="content">
+        <p class="content_title"> どんな機能があるの？</p>
+        <div class="card-deck ">
+          <div class="card text-dark bg-light mb-3" style="width: 18rem"> 
+            <img src="/assets/post_new.png" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">記録投稿</h2>
+              <p class="card-text">自分が解いた問題についての情報を投稿!解いたときに使ったメモ画像投稿にも対応。</p>
+            </div>
+          </div>
 
-<h1>CodeMemoryとは?</h1>
-<p>「復習のために競プロの記録を付けたい!」
-    「自分用に競プロのアウトプットがしたい!」
-    ような競技プログラミングプレイヤーのための復習ツールです。
-</p>
+          <div class="card text-dark bg-light mb-3" style="width: 18rem"> 
+            <img src="/assets/tag.png" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">タグ付け</h2>
+              <p class="card-text">タグをつけることで問題を類別!またタグをクリックすると同じタグのついた問題のみ表示可能</p>
+            </div>
+          </div>
 
-<h1>どんな機能があるの？</h1>
-「解いたコードを保存したい」「使ったメモも一括で保存しておきたい」
-1.解いた問題の投稿
-→コードは勿論のこと、メモ画像も保存できる！
 
-「自分なりに
-2.解いた問題に対するコメント機能
-→アウトプットにより問題に対する定着率がup!
- Tex対応のため数式も書けるので自分なりの解説が書けます!
+          <div class="card text-dark bg-light mb-3" style="width: 18rem"> 
+            <img src="/assets/output.png" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">アウトプット</h2>
+              <p class="card-text">問題の解説を書くことでアウトプット!Tex記法に対応してるので数式表示も可能!</p>
+            </div>
+          </div>
+        </div>
 
-「動的計画法だけのリスト作りたいな」
-3.タグ付け機能
-→分野や得意不得意など自分なりに問題を類別できる！！
+        <div class="card-deck">
+          <div class="card text-dark bg-light mb-3" style="width: 18rem"> 
+              <img src="/assets/review_tags.png" class="card-img-top">
+              <div class="card-body">
+                <h2 class="card-title">復習済みタグ</h2>
+                <p class="card-text">復習済みか未復習か表示！クリックすることで切り替え可能</p>
+              </div>
+          </div>
 
-「１週間前何やったっけ？」「苦手な問題だけ表示したい」
-4.問題の検索機能
-→問題名だけでなく,正誤、投稿日,タグなどでも検索できる！
+          <div class="card text-dark bg-light mb-3" style="width: 18rem"> 
+              <img src="/assets/research.png" class="card-img-top">
+              <div class="card-body">
+                <h2 class="card-title">検索機能</h2>
+                <p class="card-text">コンテスト名,問題名,正誤などで問題検索できる!投稿数が増えても安心！</p>
+              </div>
+          </div>
+        </div>
+
+        </p>
+    </div>
+</section>
+
+<section class="bottom">
+    <p>さあ、今すぐ始めよう！</p>
+    <div class="bottom-botton"><%= link_to "新規登録",new_user_registration_path,class:"btn btn-danger btn-lg"%></div>
+</section>

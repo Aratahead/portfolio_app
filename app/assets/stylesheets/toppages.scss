@@ -1,0 +1,65 @@
+.wrapper {
+  width: 100%;
+  height: 800px;
+  background-image: url('/images/pexels-kevin-ku-577585.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin-top: 20px;
+}
+
+.wrapper .title {
+  color: #ffffff;
+  position: relative;
+  top: 100px;
+  text-align: center;
+  font-size: 80px;
+  font-family: Helvetica;
+  font-style: oblique;
+}
+
+.wrapper .phrase {
+  color: #ffffff;
+  position: relative;
+  top: 110px;
+  text-align: center;
+}
+
+.wrapper .top-botton {
+  margin-top: 10px;
+  position: relative;
+  top: 200px;
+  text-align: center;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.content .content_title {
+  text-align: center;
+  font-size: 80px;
+  font-family: Helvetica;
+  border-top: solid 3px #364e96;
+  border-bottom: solid 3px #364e96;
+}
+
+.bottom p {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.bottom .bottom-botton {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+footer {
+  color: #808080;
+  background: #e5e5e5;
+  padding: 30px;
+}
+footer p {
+  text-align: center;
+}
