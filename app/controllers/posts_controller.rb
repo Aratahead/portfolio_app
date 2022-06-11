@@ -4,9 +4,8 @@ class PostsController < ApplicationController
   PER_PAGE = 10
 
   def index
-    @q = current_user.posts.ransack(params[:q])
+    @q = current_user.posts.includes(:contest, :tags).ransack(params[:q])
     @posts = @q.result.page(params[:page]).per(PER_PAGE)
-    @tag_list = Tag.all
   end
 
   def new
@@ -76,14 +75,14 @@ class PostsController < ApplicationController
   end
 
   def search
-    @q = current_user.posts.ransack(search_params)
+    @q = current_user.posts.includes(:contest, :tags).ransack(search_params)
     @posts = @q.result.page(params[:page]).per(PER_PAGE)
   end
 
   def search_tag
     @tag_list = Tag.all
     @tag = Tag.find(params[:id])
-    @posts = @tag.posts.page(params[:page]).per(PER_PAGE)
+    @posts = @tag.posts.includes(:contest, :tags).page(params[:page]).per(PER_PAGE)
   end
 
   def review_complete
