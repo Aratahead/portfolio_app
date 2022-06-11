@@ -1,82 +1,83 @@
-
-<h1 class="index-top">記録一覧</h1>
-<% if user_signed_in? %>
-<%= search_form_for(@q, url:search_path) do |f|%>
-<div class="research">
-  <%= f.label :contest_name, "コンテスト名"%>
-  <%= f.search_field :contest_contest_name_eq,placeholder: "コンテスト名",class:"input input_contest_name "%>
-  <%= f.label :contest_number, "コンテストNO."%>
-  <%= f.number_field :contest_contest_number_eq,placeholder: "コンテストNO.",class:"input input_contest_number "%>
-  <%= f.label :created_at,"投稿日"%>
-  <%= f.date_field :created_at_gteq,include_blank: true,class:"input"%>~
-  <%= f.date_field :created_at_lteq_end_of_day,include_blank: true,class:"input"%>
-  <br><%= f.label :question_name, "問題名"%>
-  <%= f.search_field :question_name_cont,placeholder: "問題名",class:"input input_question_name"%>
-  <%= f.label :tag_name,"タグ"%>
-  <%= f.search_field :tags_name_eq,placeholder: "タグ",class:"input input_tag_name"%>
-  <%= f.label :correct, "正誤"%>
-  <%= f.select :correct_eq,options_for_select({AC:1,解説AC:2,TLE:3,WA:4}),{include_blank:"選択なし"},class:"select input_correct"%>
-  <%= f.label :review_completion, "復習状態"%>
-  <%= f.select :review_completion_eq,options_for_select({未完了: 0,復習完了: 1}),{include_blank: "選択なし"},class:"select input_review_completion"%>
-  <%= f.submit nil ,class: 'btn btn-primary research-submit'%>
-</div>
-<% end %>
-
-
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th scope="col">コンテスト</th>
-      <th scope="col">投稿日</th>
-      <th scope="col">問題名</th>
-      <th scope="col">タグ</th>
-      <th scope="col">正誤</th>
-      <th scope="col">復習状態</th>
-      <th scope="col"></th>
-
-
-  </thead>
-
-  <tbody>
-  <% @posts.each do |post| %>
-     <tr>
-     <td><%= post.contest.contest_name %><%=post.contest.contest_number%></td>
-
-     <td><%= l post.created_at%></td>
-
-     <td><%= post.question_name %></td>
-
-     <td>
-     <% post.tags.each do |tag|%>
-        <%= link_to tag.name, search_tag_path(id: tag.id),class:"btn btn-link"%>
-     <% end %>
-     </td>
-
-    
-    <%if post.correct=="AC"%>
-    <td><button type="button" class="btn btn-success" disabled><%= post.correct %></button></td>
-    <% elsif post.correct=="解説AC"%>
-      <td><button type="button" class="btn btn-secondary" disabled><%= post.correct %></button></td>
-    <%else%>
-      <td><button type="button" class="btn btn-warning" disabled><%= post.correct %></button></td>
-    <%end%>
-    
-
-
-    <% if post.review_completion=="未完了"%>
-    <td><button type="button" class="btn btn-outline-danger" ><%= render "review_incomplete",post: post%></button></td>
-    <% else %>
-    <td><button type="button" class="btn btn-outline-success" disabled><%= render "review_complete",post: post%></button>
-    <%end%>
-    
-
-    <td class="text-nowrap">
-     <%= link_to "詳細",post_path(post),class:"btn btn-success"%>
-     <%= link_to "編集",edit_post_path(post),class:"btn btn-primary"%>
-     <%= link_to "削除",post_path(post), method: :delete, data: { confirm: "削除しますか?" },class:"btn btn-danger"%>
-    </td>
+<div class="base-container">
+  <h1 class="index-top">記録一覧</h1>
+  <% if user_signed_in? %>
+  <%= search_form_for(@q, url:search_path) do |f|%>
+  <div class="research">
+    <%= f.label :contest_name, "コンテスト名"%>
+    <%= f.search_field :contest_contest_name_eq,placeholder: "コンテスト名",class:"input input_contest_name "%>
+    <%= f.label :contest_number, "コンテストNO."%>
+    <%= f.number_field :contest_contest_number_eq,placeholder: "コンテストNO.",class:"input input_contest_number "%>
+    <%= f.label :created_at,"投稿日"%>
+    <%= f.date_field :created_at_gteq,include_blank: true,class:"input"%>~
+    <%= f.date_field :created_at_lteq_end_of_day,include_blank: true,class:"input"%>
+    <br><%= f.label :question_name, "問題名"%>
+    <%= f.search_field :question_name_cont,placeholder: "問題名",class:"input input_question_name"%>
+    <%= f.label :tag_name,"タグ"%>
+    <%= f.search_field :tags_name_eq,placeholder: "タグ",class:"input input_tag_name"%>
+    <%= f.label :correct, "正誤"%>
+    <%= f.select :correct_eq,options_for_select({AC:1,解説AC:2,TLE:3,WA:4}),{include_blank:"選択なし"},class:"select input_correct"%>
+    <%= f.label :review_completion, "復習状態"%>
+    <%= f.select :review_completion_eq,options_for_select({未完了: 0,復習完了: 1}),{include_blank: "選択なし"},class:"select input_review_completion"%>
+    <%= f.submit nil ,class: 'btn btn-primary research-submit'%>
+  </div>
   <% end %>
-  </tbody>
-</table>
-<% end %>
-<%= paginate @posts%>
+
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col">コンテスト</th>
+        <th scope="col">投稿日</th>
+        <th scope="col">問題名</th>
+        <th scope="col">タグ</th>
+        <th scope="col">正誤</th>
+        <th scope="col">復習状態</th>
+        <th scope="col"></th>
+
+
+    </thead>
+
+    <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+      <td><%= post.contest.contest_name %><%=post.contest.contest_number%></td>
+
+      <td><%= l post.created_at%></td>
+
+      <td><%= post.question_name %></td>
+
+      <td>
+      <% post.tags.each do |tag|%>
+          <%= link_to tag.name, search_tag_path(id: tag.id),class:"btn btn-link"%>
+      <% end %>
+      </td>
+
+      
+      <%if post.correct=="AC"%>
+      <td><button type="button" class="btn btn-success" disabled><%= post.correct %></button></td>
+      <% elsif post.correct=="解説AC"%>
+        <td><button type="button" class="btn btn-secondary" disabled><%= post.correct %></button></td>
+      <%else%>
+        <td><button type="button" class="btn btn-warning" disabled><%= post.correct %></button></td>
+      <%end%>
+      
+
+
+      <% if post.review_completion=="未完了"%>
+      <td><button type="button" class="btn btn-outline-danger" ><%= render "review_incomplete",post: post%></button></td>
+      <% else %>
+      <td><button type="button" class="btn btn-outline-success" disabled><%= render "review_complete",post: post%></button>
+      <%end%>
+      
+
+      <td class="text-nowrap">
+      <%= link_to "詳細",post_path(post),class:"btn btn-success"%>
+      <%= link_to "編集",edit_post_path(post),class:"btn btn-primary"%>
+      <%= link_to "削除",post_path(post), method: :delete, data: { confirm: "削除しますか?" },class:"btn btn-danger"%>
+      </td>
+    <% end %>
+    </tbody>
+  </table>
+  <% end %>
+  <%= paginate @posts%>
+</div>

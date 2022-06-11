@@ -51,8 +51,8 @@ code {
 
 .base-container {
   @extend .container-fluid;
-  max-width: var(--breakpoint-lg);
-  padding: 30px 15px;
+  max-width: var(--breakpoint-xl);
+  padding: 30px 0px;
 }
 
 #selectPre {
