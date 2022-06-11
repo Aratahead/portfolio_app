@@ -75,7 +75,7 @@ class PostsController < ApplicationController
   end
 
   def search
-    @q = current_user.posts.ransack(search_params)
+    @q = current_user.posts.includes(:contest, :tags).ransack(search_params)
     @posts = @q.result.page(params[:page]).per(PER_PAGE)
   end
 
