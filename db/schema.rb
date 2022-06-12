@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2022_05_26_123335) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "correct", null: false
+    t.integer "correct"
     t.bigint "contest_id"
     t.datetime "review_date"
     t.integer "review_completion", default: 0

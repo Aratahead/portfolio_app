@@ -1,6 +1,8 @@
 class AddAddColumnPosts < ActiveRecord::Migration[6.1]
   def change
-    add_column :posts, :review_date, :datetime
-    add_column :posts, :review_completion, :integer, default: 0
+    change_table :posts, bulk: true do |t|
+      t.datetime :review_date
+      t.integer :review_completion, default: 0
+    end
   end
 end
