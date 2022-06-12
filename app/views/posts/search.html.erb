@@ -1,4 +1,5 @@
-<div class="base-container">
+  <div class="base-container">
+  <%= render "layouts/flash_messages" %>
   <% if @posts.present?%>
     <h1>条件に一致する投稿は<%=@posts.count%>件です</h1>
     <table class="table table-bordered table-striped mt-2">
@@ -57,4 +58,4 @@
   <%= paginate @posts%>
   <%= link_to "前の画面に戻る",:back,class:"btn btn-dark"%>
   <%= link_to "一覧に戻る", posts_path,class:"btn btn-dark"%>
-  </div>
+</div>

@@ -1,4 +1,5 @@
-<div class="base-container">
+  <div class="base-container">
+  <%= render "layouts/flash_messages" %>
   <% if @posts.present?%>
   <h1>「<%= @tag.name %>」のタグが付いた問題</h1>
   <table class="table table-bordered table-striped">

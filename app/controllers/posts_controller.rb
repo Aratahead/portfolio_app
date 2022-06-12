@@ -22,7 +22,7 @@ class PostsController < ApplicationController
     end
     @post = current_user.posts.new(post_params)
     @post.contest_id = @contest.id
-    tag_list = params[:post][:name].split(" ")
+    tag_list = params[:post][:name].split
     if @post.correct == "AC"
       @post.review_completion = 1
       @post.review_date = Time.current
@@ -55,7 +55,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    tag_list = params[:post][:name].split(" ")
+    tag_list = params[:post][:name].split
     if @post.correct == "AC"
       @post.review_completion = 1
       @post.review_date = Time.current
