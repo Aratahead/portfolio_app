@@ -29,16 +29,16 @@ gem "jbuilder", "~> 2.7"
 gem "devise"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
+gem "carrierwave", "~> 2.0"
 gem "devise-i18n"
+gem "devise-i18n-views"
+gem "enum_help", "~> 0.0.15"
+gem "font-awesome-sass"
+gem "jquery-rails"
 gem "kaminari"
+gem "mini_magick"
 gem "rails-i18n", "~> 6.0"
 gem "ransack"
-gem "carrierwave", '~> 2.0'
-gem 'mini_magick'
-gem 'font-awesome-sass'
-gem 'jquery-rails'
-gem 'devise-i18n-views'
-gem 'enum_help', '~> 0.0.15'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,7 +49,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'bullet'
+  gem "bullet"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console", ">= 4.1.0"
   # Display performance information such as SQL time and flame graphs for each request in your browser.
