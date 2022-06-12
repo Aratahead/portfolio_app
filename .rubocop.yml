@@ -18,6 +18,8 @@ AllCops:
     - 'app/controllers/users/passwords_controller.rb'
     - 'app/controllers/users/registrations_controller.rb'
     - 'app/controllers/users/sessions_controller.rb'
+    - 'portfolio_app/bin/bundle'
+    - 'app/helpers/devise_helper.rb'
 
 Metrics/CyclomaticComplexity:
   Exclude:
