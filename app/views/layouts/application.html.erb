@@ -17,15 +17,11 @@
     <header>
       <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       <%= render "layouts/header"%>
-    </header>
-    <main>
-      <%= render "layouts/flash_messages" %>
-      <%= yield %>
-    </div>
-  </div>
-</main>
-<footer>
-  <p>&copy; ArataMatsuyama.2022</p>
-</footer>
-</body>
-</html>
+      <main>
+        <%= yield %>
+      </main>
+      <footer>
+        <p>&copy; ArataMatsuyama.2022</p>
+      </footer>
+    </body>
+  </html>

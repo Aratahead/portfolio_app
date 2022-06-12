@@ -1,6 +1,7 @@
 <div class="base-container">
-  <h1>編集</h1>
-  <%= render "form",button_value:"更新"%>
-  <%= link_to "前の画面に戻る",:back,class:"btn btn-dark back mt-3"%>
-  <%= link_to "一覧に戻る", posts_path,class:"btn btn-dark back mt-3"%>
+<%= render "layouts/flash_messages" %>
+<h1>編集</h1>
+<%= render "form",button_value:"更新"%>
+<%= link_to "前の画面に戻る",:back,class:"btn btn-dark back mt-3"%>
+<%= link_to "一覧に戻る", posts_path,class:"btn btn-dark back mt-3"%>
 </div>
