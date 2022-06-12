@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   def create
     @contest = Contest.new(contest_params)
     unless @contest.save
-      flash.now[:alert] = "投稿に失敗しました"
+      flash.now[:alert] = t "flash.new _fail"
       render :new
     end
     @post = current_user.posts.new(post_params)
@@ -29,9 +29,10 @@ class PostsController < ApplicationController
     end
     if @post.save
       @post.save_tag(tag_list)
-      redirect_to @post, notice: "投稿しました"
+      flash[:notice] = t "flash.new"
+      redirect_to @post
     else
-      flash.now[:alert] = "投稿に失敗しました"
+      flash.now[:alert] = t "flash.new _fail"
       render :new
     end
   end
@@ -47,7 +48,8 @@ class PostsController < ApplicationController
       Tag.find_by(id: number).delete if PostTag.where(tag_id: number).count.zero?
     end
     @post.destroy!
-    redirect_to posts_path, alert: "削除しました"
+    flash.new[:alert] = t "flash.destroy"
+    redirect_to posts_path
   end
 
   def edit
@@ -67,9 +69,10 @@ class PostsController < ApplicationController
           Tag.find_by(id: tag.id).delete if PostTag.where(tag_id: tag.id).count.zero?
         end
       end
-      redirect_to @post, notice: "更新しました"
+      flash[:notice] = t "flash.update"
+      redirect_to @post
     else
-      flash.now[:alert] = "更新に失敗しました"
+      flash.now[:alert] = t "flash.update_fail"
       render :edit
     end
   end
