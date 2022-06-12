@@ -14,7 +14,6 @@ AllCops:
     - 'node_modules/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
-    - 'config/environments/development.rb'
     - 'app/controllers/users/passwords_controller.rb'
     - 'app/controllers/users/registrations_controller.rb'
     - 'app/controllers/users/sessions_controller.rb'
@@ -24,6 +23,11 @@ AllCops:
 Metrics/CyclomaticComplexity:
   Exclude:
     - 'bin/bundle'
+Rails/FilePath:
+  Exclude:
+    - 'config/environments/development.rb'
+    - 'portfolio_app/config/environments/development.rb'
+
 # 日本語のコメントを許可
 Style/AsciiComments:
   Enabled: false
