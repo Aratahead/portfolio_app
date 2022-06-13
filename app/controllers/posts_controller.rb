@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post_contest, only: %i[show destroy edit update review_complete review_incomplete]
+  before_action :set_tag_list, only: %i[update create]
   PER_PAGE = 10
 
   def index
@@ -15,23 +16,16 @@ class PostsController < ApplicationController
   end
 
   def create
-    @contest = Contest.new(contest_params)
-    unless @contest.save
-      flash.now[:alert] = "投稿に失敗しました"
-      render :new
-    end
-    @post = current_user.posts.new(post_params)
-    @post.contest_id = @contest.id
-    tag_list = params[:post][:name].split
-    if @post.correct == "AC"
-      @post.review_completion = 1
-      @post.review_date = Time.current
-    end
+    contest = Contest.create(contest_params)
+    @post = contest.posts.new(post_params)
+    @post.user_id = current_user.id
+    @post.post_correct?
     if @post.save
-      @post.save_tag(tag_list)
-      redirect_to @post, notice: "投稿しました"
+      @post.save_tag(@tag_list)
+      flash[:notice] = t "flash.new"
+      redirect_to @post
     else
-      flash.now[:alert] = "投稿に失敗しました"
+      flash.now[:alert] = t "flash.new _fail"
       render :new
     end
   end
@@ -41,13 +35,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    post_tag_id = @post.tags.pluck(:tag_id)
+    tags = @post.tags.pluck(:name)
     @post.destroy!
-    post_tag_id.each do |number|
-      Tag.find_by(id: number).delete if PostTag.where(tag_id: number).count.zero?
-    end
-    @post.destroy!
-    redirect_to posts_path, alert: "削除しました"
+    @post.old_tag_destroy?(tags)
+    flash.now[:alert] = t "flash.destroy"
+    redirect_to posts_path
   end
 
   def edit
@@ -55,21 +47,14 @@ class PostsController < ApplicationController
   end
 
   def update
-    tag_list = params[:post][:name].split
-    if @post.correct == "AC"
-      @post.review_completion = 1
-      @post.review_date = Time.current
-    end
+    @post.post_correct?
     if @post.update(post_params) && @contest.update(contest_params)
-      @post.save_tag(tag_list)
-      if @old_tags.present?
-        @old_tags.each do |tag|
-          Tag.find_by(id: tag.id).delete if PostTag.where(tag_id: tag.id).count.zero?
-        end
-      end
-      redirect_to @post, notice: "更新しました"
+      @post.save_tag(@tag_list)
+      @post.old_tag_destroy?
+      flash[:notice] = t "flash.update"
+      redirect_to @post
     else
-      flash.now[:alert] = "更新に失敗しました"
+      flash.now[:alert] = t "flash.update_fail"
       render :edit
     end
   end
@@ -99,6 +84,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def set_tag_list
+    @tag_list = params[:post][:name].split
+  end
 
   def search_params
     params.require(:q).permit!

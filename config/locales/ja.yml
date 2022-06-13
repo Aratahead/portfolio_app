@@ -32,3 +32,10 @@ ja:
       post:
         contest_name: コンテスト名
         contest_number: コンテスト回
+  flash:
+    new: 投稿しました
+    new_fail: 投稿に失敗しました
+    destroy: 削除しました
+    update: 更新しました
+    update_fail: 更新に失敗しました
+
