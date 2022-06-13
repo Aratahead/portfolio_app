@@ -28,6 +28,12 @@ Rails/FilePath:
     - 'config/environments/development.rb'
     - 'portfolio_app/config/environments/development.rb'
 
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/AbcSize:
+  Max: 20
+
 # 日本語のコメントを許可
 Style/AsciiComments:
   Enabled: false
