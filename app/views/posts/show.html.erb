@@ -72,3 +72,15 @@
   <%= link_to "一覧に戻る", posts_path,class:"btn btn-dark mt-3"%>
 </div>
 
+
+<script>
+$(document).ready(function(){
+    if (window.name != "reload_complete") {
+        location.reload();
+        window.name = "reload_complete";
+    } else {
+        window.name = "";
+    }
+});
+</script>
+
