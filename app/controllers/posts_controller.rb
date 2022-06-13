@@ -16,15 +16,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    @contest = Contest.new(contest_params)
-    unless @contest.save
-      flash.now[:alert] = "投稿に失敗しました"
-      render :new
-    end
-    @post = current_user.posts.new(post_params)
-    @post.contest_id = @contest.id
+    contest = Contest.create(contest_params)
+    @post = contest.posts.new(post_params)
+    @post.user_id = current_user.id
     @post.post_correct?
-    if @post.save && @contest.save
+    if @post.save
       @post.save_tag(@tag_list)
       flash[:notice] = t "flash.new"
       redirect_to @post

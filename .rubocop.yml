@@ -32,7 +32,7 @@ Metrics/MethodLength:
   Max: 15
 
 Metrics/AbcSize:
-  Max: 20
+  Max: 22
 
 # 日本語のコメントを許可
 Style/AsciiComments:
