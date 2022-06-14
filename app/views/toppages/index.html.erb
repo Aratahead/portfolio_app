@@ -4,7 +4,7 @@
     <div class="container">
         <div class="content">
         <p class="title">CodeMemory</p>
-        <p class="phrase">~CodeMemoryは競技プログラミングの復習をサポートするサービスです~</p>
+        <p class="phrase">CodeMemoryは競技プログラミングの<br class="br-pc">復習を<br class="br-sp">サポートするサービスです</p>
         <div class="top-botton">
         <%= link_to "新規登録",new_user_registration_path,class:"btn btn-danger btn-lg"%>
         <%= link_to "ログイン", new_user_session_path,class:"btn btn-primary btn-lg"%>
@@ -13,12 +13,12 @@
     </div>
 </section>
 
-<section class="content">
-    <div class="container">
-        <div class="content">
-        <p class="content_title"> どんな機能があるの？</p>
-        <div class="card-deck ">
-          <div class="card text-dark bg-light mb-3" style="width: 18rem"> 
+<section class="content container">
+  
+        <p class="content_title"> どんな<br class="br-sp">機能があるの？</p>
+
+        <div class="card-deck">
+          <div class="card text-dark bg-light" style="width: 18rem"> 
             <img src="/assets/post_new.png" class="card-img-top">
             <div class="card-body">
               <h2 class="card-title">記録投稿</h2>
@@ -26,8 +26,8 @@
             </div>
           </div>
 
-          <div class="card text-dark bg-light mb-3" style="width: 18rem"> 
-            <img src="/assets/tag.png" class="card-img-top">
+          <div class="card text-dark bg-light" style="width: 18rem"> 
+            <img src="/assets/tag.png" class="card-img-top ">
             <div class="card-body">
               <h2 class="card-title">タグ付け</h2>
               <p class="card-text">タグをつけることで問題を類別！また、タグをクリックすると同じタグのついた問題のみ表示可能！</p>
@@ -35,17 +35,18 @@
           </div>
 
 
-          <div class="card text-dark bg-light mb-3" style="width: 18rem"> 
+          <div class="card text-dark bg-light" style="width: 18rem"> 
             <img src="/assets/output.png" class="card-img-top">
-            <div class="card-body">
+            <div class="card-body ">
               <h2 class="card-title">アウトプット</h2>
               <p class="card-text">問題の解答、ポイントを自分で書くことでアウトプット！Tex記法に対応してるので数式表示も可能。</p>
             </div>
           </div>
         </div>
 
+
         <div class="card-deck">
-          <div class="card text-dark bg-light mb-3" style="width: 18rem"> 
+          <div class="card text-dark bg-light" style="width: 18rem"> 
               <img src="/assets/review_tags.png" class="card-img-top">
               <div class="card-body">
                 <h2 class="card-title">復習済みタグ</h2>
@@ -53,17 +54,16 @@
               </div>
           </div>
 
-          <div class="card text-dark bg-light mb-3" style="width: 18rem"> 
+          <div class="card text-dark bg-light" style="width: 18rem"> 
               <img src="/assets/research.png" class="card-img-top">
-              <div class="card-body">
+              <div class="card-body ">
                 <h2 class="card-title">検索機能</h2>
                 <p class="card-text">コンテスト名,問題名,正誤などで問題検索できる！</p>
               </div>
           </div>
         </div>
-
         </p>
-    </div>
+    
 </section>
 
 <section class="bottom">
