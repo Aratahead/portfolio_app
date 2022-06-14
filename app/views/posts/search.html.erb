@@ -1,57 +1,8 @@
   <div class="base-container">
   <%= render "layouts/flash_messages" %>
   <% if @posts.present?%>
-    <h1>条件に一致する投稿は<%=@posts.count%>件です</h1>
-    <table class="table table-bordered table-striped mt-2">
-      <thead>
-      <tr>
-            <th scope="col">コンテスト</th>
-            <th scope="col">投稿日</th>
-            <th scope="col">問題名</th>
-            <th scope="col">タグ</th>
-            <th scope="col">正誤</th>
-            <th scope="col">復習状態</th>
-            <th scope="col"></th>
-      </thead>
-
-      <tbody>
-      
-      <% @posts.each do |post| %>
-      <tr>
-      <td><%= post.contest.contest_name %><%=post.contest.contest_number%></td>
-      <td><%= l post.created_at%></td>
-      <td><%= post.question_name %></td>
-
-      <td>
-        <% post.tags.each do |tag|%>
-            <%= link_to tag.name, search_tag_path(id: tag.id),class:"btn btn-link"%>
-        <% end %>
-      </td>
-
-      <%if post.correct=="AC"%>
-          <td><button type="button" class="btn btn-success" disabled><%= post.correct %></button></td>
-        <% elsif post.correct=="解説AC"%>
-          <td><button type="button" class="btn btn-secondary" disabled><%= post.correct %></button></td>
-        <%else%>
-          <td><button type="button" class="btn btn-warning" disabled><%= post.correct %></button></td>
-      <%end%>
-        
-
-
-      <% if post.review_completion=="未完了"%>
-        <td><button type="button" class="btn btn-outline-danger" ><%= render "review_incomplete",post: post%></button></td>
-        <% else %>
-        <td><button type="button" class="btn btn-outline-success" disabled><%= render "review_complete",post: post%></button>
-      <%end%>
-          
-      <td class="text-nowrap">
-        <%= link_to "詳細",post_path(post),class:"btn btn-success"%>
-        <%= link_to "編集",edit_post_path(post),class:"btn btn-primary"%>
-        <%= link_to "削除",post_path(post), method: :delete, data: { confirm: "削除しますか?" },class:"btn btn-danger"%>
-        </td>
-    <% end%>
-    </tbody>
-    </table>
+    <h1 class="top">検索結果</h1>
+  <%= render "result"%>
   <%else%>
     <h1>条件に一致する投稿はありません</h1>
   <%end%>

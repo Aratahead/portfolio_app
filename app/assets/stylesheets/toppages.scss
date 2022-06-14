@@ -12,7 +12,7 @@
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .wrapper {
     height: 500px;
     overflow: hidden;
@@ -32,7 +32,7 @@
   font-style: oblique;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .wrapper .title {
     font-size: 300%;
   }
@@ -46,13 +46,7 @@
   font-size: 150%;
 }
 
-@media screen and (min-width: 480px) {
-  .br-sp {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .wrapper .phrase {
     font-size: 100%;
   }
@@ -77,11 +71,11 @@
   border-bottom: solid 3px #364e96;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .content .content_title {
     position: relative;
     text-align: center;
-    font-size: 100%;
+    font-size: 130%;
   }
 }
 

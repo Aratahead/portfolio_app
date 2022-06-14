@@ -87,6 +87,9 @@ code {
   }
 }
 
+.top {
+  margin-top: 30px;
+}
 #selectPre {
   position: absolute;
   top: 0;
@@ -241,4 +244,8 @@ div.field_with_errors {
   input {
     border: 2px solid red;
   }
+}
+
+.pagination {
+  justify-content: center;
 }
