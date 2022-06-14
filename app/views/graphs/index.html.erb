@@ -1,1 +1,18 @@
+<div class="base-container">
+<h1 class="top"><%= current_user.nickname.present? ? "#{current_user.nickname}":"#{current_user.email}"%>さんの達成状況</h1>
+  <h2>総解答数:<%= @post.count%>題</h2>
+  <%= area_chart @post.group_by_day(:created_at).count%>
 
+
+  <h2>正誤内訳</h2>
+  <p>AC:<%=@ac_num%>題</p>
+  <p>解説AC:<%=@commentary_ac_num%>題</p>
+  <p>TLE:<%=@tle_num%>題</p>
+  <p>WA:<%=@wa_num%>題</p>
+  <%= pie_chart @post.group(:correct).count%>
+
+
+  <h2>復習完了率:<%= @correct_ratio %>%</h2>
+  <%= pie_chart @post.group(:review_completion).count%>
+
+</div>
