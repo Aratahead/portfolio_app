@@ -55,6 +55,41 @@ code {
   padding: 30px 0px;
 }
 
+@media screen and (min-width: 480px) {
+  .base-container {
+    .br-sp {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .last {
+    margin-bottom: 10px;
+  }
+  thead {
+    display: none;
+  }
+  td {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  .btn {
+    text-align: center;
+  }
+}
+
+.top {
+  margin-top: 30px;
+}
 #selectPre {
   position: absolute;
   top: 0;
@@ -209,4 +244,8 @@ div.field_with_errors {
   input {
     border: 2px solid red;
   }
+}
+
+.pagination {
+  justify-content: center;
 }
