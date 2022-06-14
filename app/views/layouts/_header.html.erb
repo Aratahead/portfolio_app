@@ -9,8 +9,15 @@
      <% if user_signed_in?%>
           <%= link_to "投稿一覧", posts_path,class: "nav-item nav-link active" %>
           <%= link_to "新規投稿", new_post_path,class: "nav-item nav-link active" %>
-          <%= link_to "ユーザー情報・編集",edit_user_registration_path,class: "nav-item nav-link active" %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか?"},class: "nav-item nav-link active" %>
+          <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown">
+            <%= current_user.nickname.present? ? "#{current_user.nickname}":"#{current_user.email}"%>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "ユーザー情報・編集",edit_user_registration_path,class: "dropdown-item" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか?"},class: "dropdown-item" %>
+          </div>
+          </li>
      <% else %>
           <%= link_to "新規登録",new_user_registration_path ,class: "nav-item nav-link active" %>
           <%= link_to "ログイン", new_user_session_path,class: "nav-item nav-link active" %>
