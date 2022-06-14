@@ -15,6 +15,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to "ユーザー情報・編集",edit_user_registration_path,class: "dropdown-item" %>
+            <%= link_to "達成状況",graphs_path,class: "dropdown-item" %>
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか?"},class: "dropdown-item" %>
           </div>
           </li>

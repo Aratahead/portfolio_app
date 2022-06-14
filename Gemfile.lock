@@ -80,6 +80,7 @@ GEM
       marcel (~> 1.0.0)
       mini_mime (>= 0.1.3)
       ssrf_filter (~> 1.0)
+    chartkick (4.2.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
@@ -283,6 +284,7 @@ DEPENDENCIES
   bullet
   byebug
   carrierwave (~> 2.0)
+  chartkick
   devise
   devise-i18n
   devise-i18n-views

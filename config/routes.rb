@@ -6,12 +6,13 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     passwords: "users/passwords"
   }
-  get "search", to: "posts#search"
   resources :posts
+  get "search", to: "posts#search"
   get "search_tag", to: "posts#search_tag"
   post "/review_complete/:id", to: "posts#review_complete", as: "review_complete"
   delete "/review_incomplete/:id", to: "posts#review_incomplete", as: "review_incomplete"
   get "/toppages", to: "toppages#index"
+  get "/graphs", to: "graphs#index"
   devise_scope :user do
     post "user/guest_sign_in", to: "users/sessions#guest_sign_in"
   end
