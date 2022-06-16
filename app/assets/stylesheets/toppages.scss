@@ -7,18 +7,21 @@
   background-position: center center;
   margin-top: 20px;
   overflow: hidden;
+}
+
+@media screen and (min-width: 540px) {
   .br-sp {
     display: none;
   }
 }
 
 @media screen and (max-width: 540px) {
+  .br-pc {
+    display: none;
+  }
   .wrapper {
     height: 500px;
     overflow: hidden;
-    .br-pc {
-      display: none;
-    }
   }
 }
 
