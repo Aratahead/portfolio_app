@@ -30,17 +30,17 @@ gem "devise"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
 gem "carrierwave", "~> 2.0"
+gem "chartkick"
 gem "devise-i18n"
 gem "devise-i18n-views"
 gem "enum_help", "~> 0.0.15"
 gem "font-awesome-sass"
+gem "groupdate"
 gem "jquery-rails"
 gem "kaminari"
 gem "mini_magick"
 gem "rails-i18n", "~> 6.0"
 gem "ransack"
-gem "chartkick"
-gem "groupdate"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

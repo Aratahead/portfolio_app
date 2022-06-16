@@ -9,10 +9,9 @@
   <p>解説AC:<%=@commentary_ac_num%>題</p>
   <p>TLE:<%=@tle_num%>題</p>
   <p>WA:<%=@wa_num%>題</p>
-  <%= pie_chart @post.group(:correct).count%>
+  <%= pie_chart [['AC',@ac_num], ['解説AC',@commentary_ac_num],['TLE',@tle_num],['WA',@wa_num]],colors: ["#3cb371", "#a9a9a9","#ffff00","#ffff00"] %>
 
-
+  
   <h2>復習完了率:<%= @correct_ratio %>%</h2>
-  <%= pie_chart @post.group(:review_completion).count%>
-
+  <%= pie_chart [['復習完了', @review_completion_num],['未完了',@review_incompletion_num]],colors: ["#3cb371", "#ff0000"]%>
 </div>

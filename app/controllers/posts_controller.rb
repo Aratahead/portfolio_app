@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
   def index
     @q = current_user.posts.includes(:contest, :tags).ransack(params[:q])
-    @posts = @q.result.page(params[:page]).per(PER_PAGE)
+    @posts = @q.result.page(params[:page]).order(created_at: :desc).per(PER_PAGE)
   end
 
   def new
