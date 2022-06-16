@@ -1,0 +1,73 @@
+<div class="base-container">
+<% if @post.count==0%>
+  <h1>投稿はまだありません。投稿してみましょう！！</h1>
+<% else%>
+  <h1 class="top"><%= current_user.nickname.present? ? "#{current_user.nickname}":"#{current_user.email}"%>さんの達成状況</h1>
+    <h2>総解答数:<%= @post.count%>題</h2>
+    <%= area_chart @post.group_by_day(:created_at).count,xtitle:"日付",ytitle:"投稿数"%>
+
+
+    <h2>正誤内訳</h2>
+    <table class="table table-striped table-bordered table-sm">
+     <thead>
+        <tr>
+          <th>正誤</th>
+          <th>題数</th>
+          <th>占有率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+           <td data-label="正誤"><button type="button" class="btn btn-success" disabled>AC</button></td>
+           <td data-label="題数"><%=@ac_num%></td>
+           <td data-label="占有率"><%=(100 * @ac_num/ @post.count).to_f%>%</td>
+        </tr>
+        <tr>
+           <td data-label="正誤"><button type="button" class="btn btn-secondary" disabled>解説AC</button></td>
+           <td data-label="題数"><%=@commentary_ac_num%></td> 
+           <td data-label="占有率"><%=(100 * @commentary_ac_num/ @post.count).to_f %>%</td>
+        </tr>
+        <tr>
+           <td data-label="正誤"><button type="button" class="btn btn-warning" disabled>TLE</button></td>
+           <td data-label="題数"><%=@tle_num%></td>
+           <td data-label="占有率"><%=(100 * @tle_num/ @post.count).to_f%>%</td>
+        </tr>
+        <tr>
+           <td data-label="正誤"><button type="button" class="btn btn-warning" disabled>WA</button></td>
+           <td data-label="題数"><%=@wa_num%></td>
+           <td data-label="占有率"><%=(100 * @wa_num/ @post.count).to_f %>%</td>
+        </tr>
+      </tbody>
+    </table>
+        
+    <%= pie_chart [['AC',@ac_num], ['解説AC',@commentary_ac_num],['TLE',@tle_num],['WA',@wa_num]],colors: ["#3cb371", "#a9a9a9","#ffff00","#ffff00"] %>
+
+    
+    <h2>復習完了率:<%= @correct_ratio %>%</h2>
+
+    <table class="table table-striped table-bordered table-sm">
+     <thead>
+        <tr>
+          <th>復習状態</th>
+          <th>題数</th>
+          <th>占有率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+           <td data-label="復習状態"><button type="button" class="btn btn-outline-success" disabled>復習完了</button></td>
+           <td data-label="題数"><%=@review_completion_num%></td>
+           <td data-label="占有率"><%=(100 * @review_completion_num/ @post.count).to_f%>%</td>
+        </tr>
+        <tr>
+           <td data-label="復習状態"><button type="button" class="btn btn-outline-danger" disabled>未完了</button></td>
+           <td data-label="題数"><%=@review_incompletion_num%></td> 
+           <td data-label="占有率"><%=(100 * @review_incompletion_num/ @post.count).to_f %>%</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <%= pie_chart [['復習完了', @review_completion_num],['未完了',@review_incompletion_num]],colors: ["#3cb371", "#ff0000"]%>
+<%end%>
+</div>
