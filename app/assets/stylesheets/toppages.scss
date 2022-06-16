@@ -12,7 +12,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 540px) {
   .wrapper {
     height: 500px;
     overflow: hidden;
@@ -32,7 +32,7 @@
   font-style: oblique;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 540px) {
   .wrapper .title {
     font-size: 300%;
   }
@@ -46,7 +46,7 @@
   font-size: 150%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 540px) {
   .wrapper .phrase {
     font-size: 100%;
   }
@@ -71,7 +71,7 @@
   border-bottom: solid 3px #364e96;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 540px) {
   .content .content_title {
     position: relative;
     text-align: center;
