@@ -1,5 +1,6 @@
   <div class="base-container">
   <h1 class="top">記録一覧</h1>
+  <%= render "layouts/flash_messages" %>
   <% if user_signed_in? %>
   <%= search_form_for(@q, url:search_path) do |f|%>
   <div class="research">
