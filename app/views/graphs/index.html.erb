@@ -18,24 +18,24 @@
       </thead>
       <tbody>
         <tr>
-           <td><button type="button" class="btn btn-success" disabled>AC</button></td>
-           <td><%=@ac_num%></td>
-           <td><%=(100 * @ac_num/ @post.count).to_f%>%</td>
+           <td data-label="正誤"><button type="button" class="btn btn-success" disabled>AC</button></td>
+           <td data-label="題数"><%=@ac_num%></td>
+           <td data-label="占有率"><%=(100 * @ac_num/ @post.count).to_f%>%</td>
         </tr>
         <tr>
-           <td><button type="button" class="btn btn-secondary" disabled>解説AC</button></td>
-           <td><%=@commentary_ac_num%></td> 
-           <td><%=(100 * @commentary_ac_num/ @post.count).to_f %>%</td>
+           <td data-label="正誤"><button type="button" class="btn btn-secondary" disabled>解説AC</button></td>
+           <td data-label="題数"><%=@commentary_ac_num%></td> 
+           <td data-label="占有率"><%=(100 * @commentary_ac_num/ @post.count).to_f %>%</td>
         </tr>
         <tr>
-           <td><button type="button" class="btn btn-warning" disabled>TLE</button></td>
-           <td><%=@tle_num%></td>
-           <td><%=(100 * @tle_num/ @post.count).to_f%>%</td>
+           <td data-label="正誤"><button type="button" class="btn btn-warning" disabled>TLE</button></td>
+           <td data-label="題数"><%=@tle_num%></td>
+           <td data-label="占有率"><%=(100 * @tle_num/ @post.count).to_f%>%</td>
         </tr>
         <tr>
-           <td><button type="button" class="btn btn-warning" disabled>WA</button></td>
-           <td><%=@wa_num%></td>
-           <td><%=(100 * @wa_num/ @post.count).to_f %>%</td>
+           <td data-label="正誤"><button type="button" class="btn btn-warning" disabled>WA</button></td>
+           <td data-label="題数"><%=@wa_num%></td>
+           <td data-label="占有率"><%=(100 * @wa_num/ @post.count).to_f %>%</td>
         </tr>
       </tbody>
     </table>
@@ -44,6 +44,30 @@
 
     
     <h2>復習完了率:<%= @correct_ratio %>%</h2>
+
+    <table class="table table-striped table-bordered table-sm">
+     <thead>
+        <tr>
+          <th>復習状態</th>
+          <th>題数</th>
+          <th>占有率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+           <td data-label="復習状態"><button type="button" class="btn btn-outline-success" disabled>復習完了</button></td>
+           <td data-label="題数"><%=@review_completion_num%></td>
+           <td data-label="占有率"><%=(100 * @review_completion_num/ @post.count).to_f%>%</td>
+        </tr>
+        <tr>
+           <td data-label="復習状態"><button type="button" class="btn btn-outline-danger" disabled>未完了</button></td>
+           <td data-label="題数"><%=@review_incompletion_num%></td> 
+           <td data-label="占有率"><%=(100 * @review_incompletion_num/ @post.count).to_f %>%</td>
+        </tr>
+      </tbody>
+    </table>
+
+
     <%= pie_chart [['復習完了', @review_completion_num],['未完了',@review_incompletion_num]],colors: ["#3cb371", "#ff0000"]%>
 <%end%>
 </div>
