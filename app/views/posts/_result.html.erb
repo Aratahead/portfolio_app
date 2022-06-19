@@ -29,7 +29,7 @@
 
       
       <%if post.correct=="AC"%>
-      <td data-label="正誤"><button type="button" class="btn btn-success" disabled><%= post.correct %></button></td>
+        <td data-label="正誤"><button type="button" class="btn btn-success" disabled><%= post.correct %></button></td>
       <% elsif post.correct=="解説AC"%>
         <td data-label="正誤"><button type="button" class="btn btn-secondary" disabled><%= post.correct %></button></td>
       <%else%>
@@ -39,9 +39,9 @@
 
 
       <% if post.review_completion=="未完了"%>
-      <td data-label="復習状態"><button type="button" class="btn btn-outline-danger" ><%= render "review_incomplete",post: post%></button></td>
+      <td data-label="復習状態"><%= render "review_incomplete",post: post%></td>
       <% else %>
-      <td data-label="復習状態"><button type="button" class="btn btn-outline-success" disabled><%= render "review_complete",post: post%></button>
+      <td data-label="復習状態"><%= render "review_complete",post: post%></td>
       <%end%>
       
 

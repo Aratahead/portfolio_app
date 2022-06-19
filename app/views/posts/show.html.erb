@@ -67,7 +67,7 @@
 
   <% if @post.image? %>
     <span class="memo-title">解説メモ</span>
-    <p class="image"><%= image_tag @post.image.url %></p>
+    <p class="image"><%= image_tag @post.image.url%></p>
   <% end %>
   <%= link_to "一覧に戻る", posts_path,class:"btn btn-dark mt-3"%>
 </div>

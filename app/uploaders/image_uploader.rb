@@ -27,6 +27,4 @@ class ImageUploader < CarrierWave::Uploader::Base
     var = :"@#{mounted_as}_secure_token"
     model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
   end
-
-  process resize_to_limit: [750, 1000]
 end
