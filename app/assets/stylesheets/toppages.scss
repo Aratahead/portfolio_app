@@ -9,13 +9,13 @@
   overflow: hidden;
 }
 
-@media screen and (min-width: 540px) {
+@media screen and (min-width: 599px) {
   .br-sp {
     display: none;
   }
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 599px) {
   .br-pc {
     display: none;
   }
@@ -23,19 +23,20 @@
     height: 500px;
     overflow: hidden;
   }
+
+  .gest-login-btn {
+    margin-top: 5px;
+  }
 }
 
 .wrapper .title {
-  color: #ffffff;
   position: relative;
   top: 100px;
   text-align: center;
   font-size: 500%;
-  font-family: Helvetica;
-  font-style: oblique;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 599px) {
   .wrapper .title {
     font-size: 300%;
   }
@@ -49,7 +50,7 @@
   font-size: 150%;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 599px) {
   .wrapper .phrase {
     font-size: 100%;
   }
@@ -58,7 +59,7 @@
 .wrapper .top-botton {
   margin-top: 10px;
   position: relative;
-  top: 200px;
+  top: 130px;
   text-align: center;
 }
 
